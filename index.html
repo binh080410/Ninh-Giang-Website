@@ -8,29 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-      /* --- NỀN TRANG --- */
-      #homepage {
-        position: relative;
-        background-image: url("img/schoolbg.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
-
-      #homepage::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.7);
-        z-index: 1;
-      }
-
-      header {
-        position: relative;
-        z-index: 2;
-      }
-
-      /* --- HIỆU ỨNG GẠCH CHÂN --- */
+      /* --- MENU UNDERLINE ANIMATION --- */
       nav a {
         position: relative;
         text-decoration: none;
@@ -47,11 +25,12 @@
         transition: width 0.3s ease;
       }
 
-      nav a:hover::after {
+      nav a:hover::after,
+      nav a.active-link::after {
         width: 100%;
       }
 
-      /* --- HIỆU ỨNG FADE-UP KHI LOAD TRANG --- */
+      /* --- FADE-UP ANIMATION --- */
       @keyframes fadeUp {
         0% {
           opacity: 0;
@@ -69,54 +48,462 @@
     </style>
   </head>
 
-  <body class="bg-white h-[200vh]">
+  <body class="m-0 font-inter text-white scroll-smooth">
     <!-- HEADER -->
-      <header class="sticky top-0 z-50 bg-white/10 backdrop-blur-sm shadow-sm">
-        <div class="max-w-7xl mx-auto flex items-center px-6 h-16">
-          <nav
-            class="flex-1 flex justify-center items-center space-x-14 mx-4 hidden md:flex"
+    <header
+      id="header"
+      class="fixed top-0 left-0 w-full z-[50] bg-[rgba(255,255,255,0.06)] backdrop-blur-[8px] transition-all duration-300 ease-in-out"
+    >
+      <div class="max-w-7xl mx-auto flex items-center px-6 h-16">
+        <nav
+          class="flex-1 flex justify-center items-center space-x-14 mx-4 hidden md:flex"
+        >
+          <a href="#home" class="text-white font-semibold text-md">Trang chủ</a>
+          <a href="#intro" class="text-white font-semibold text-md"
+            >Giới thiệu</a
           >
-            <a
-              href="#"
-              class="text-white font-semibold text-md hover:text-blue-300 transition"
-              >Trang chủ</a
-            >
-            <a
-              href="#"
-              class="text-white font-semibold text-md hover:text-blue-300 transition"
-              >Giới thiệu</a
-            >
-            <a
-              href="#"
-              class="text-white font-semibold text-md hover:text-blue-300 transition"
-              >Di tích & Văn hóa</a
-            >
-            <a
-              href="#"
-              class="text-white font-semibold text-md hover:text-blue-300 transition"
-              >Tin tức & Hoạt động</a
-            >
-          </nav>
-        </div>
-      </header>
-    <div class="h-[100vh]" id="homepage">
-      <!-- NỘI DUNG CHÍNH -->
-      <div
-        class="absolute inset-0 flex flex-col items-center mt-40 text-center text-white z-10 fade-up"
-      >
+          <a href="#history" class="text-white font-semibold text-md"
+            >Lịch sử</a
+          >
+          <a href="#culture" class="text-white font-semibold text-md"
+            >Di tích & Văn hóa</a
+          >
+          <a href="#news" class="text-white font-semibold text-md"
+            >Tin tức & Hoạt động</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- PHẦN 1: TRANG CHỦ -->
+    <section
+      id="home"
+      class="relative flex justify-center text-center before:absolute before:inset-0 before:bg-[rgba(0,0,0,0.45)] before:z-[1] bg-[url('img/schoolbg.jpg')] bg-center bg-cover bg-no-repeat h-[100vh]"
+    >
+      <div class="relative z-[2] fade-up">
         <img
           src="img/logo.png"
           alt="Logo"
-          class="w-28 mb-4 rounded-full shadow-lg"
+          class="w-28 mb-4 rounded-full shadow-lg mx-auto mt-40"
         />
-        <h1 class="text-4xl font-bold my-4">Trường THPT Khúc Thừa Dụ</h1>
-        <a
-          href="#"
-          class="relative text-white font-semibold text-lg transition duration-300 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full after:transition-all after:duration-300"
-        >
-          Tham gia mini game tại đây
-        </a>
+        <h1 class="text-4xl font-bold my-8 section-title">
+          Trường THPT Khúc Thừa Dụ
+        </h1>
       </div>
-    </div>
+    </section>
+
+    <!-- PHẦN 2: GIỚI THIỆU -->
+    <section
+      id="intro"
+      class="relative flex justify-center text-gray-800 py-24"
+    >
+      <div
+        class="relative z-[2] fade-up max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-6"
+      >
+        <!-- CỘT 1: THÔNG TIN -->
+        <div>
+          <h1 class="text-3xl font-bold text-sky-700 my-2 section-title">
+            Xã Ninh Giang
+          </h1>
+          <p class="text-gray-600 leading-relaxed my-8">
+            Xã Ninh Giang là một đơn vị hành chính mới thuộc thành phố Hải
+            Phòng, chính thức được thành lập vào ngày
+            <strong>16/06/2025</strong> theo Nghị quyết
+            <em>1669/NQ-UBTVQH15</em>. Xã được hình thành từ việc sáp nhập 4 đơn
+            vị cũ: thị trấn Ninh Giang, xã Vĩnh Hòa, xã Hồng Dụ và xã Hiệp Lực.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+            <div
+              class="p-3 rounded-lg bg-gray-50 shadow-sm border border-slate-200"
+            >
+              <div class="text-sm text-gray-500">Diện tích</div>
+              <div class="font-semibold text-gray-800">27.41 km²</div>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-gray-50 shadow-sm border border-slate-200"
+            >
+              <div class="text-sm text-gray-500">Dân số (01/07/2025)</div>
+              <div class="font-semibold text-gray-800">39.535 người</div>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-gray-50 shadow-sm border border-slate-200"
+            >
+              <div class="text-sm text-gray-500">Mật độ dân số</div>
+              <div class="font-semibold text-gray-800">~2.207 người/km²</div>
+            </div>
+
+            <div
+              class="p-3 rounded-lg bg-gray-50 shadow-sm border border-slate-200"
+            >
+              <div class="text-sm text-gray-500">Trụ sở UBND</div>
+              <div class="font-semibold text-gray-800">
+                Đường Lê Thanh Nghị, xã Ninh Giang
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="mt-8 text-sm text-gray-500 border-t border-dashed border-slate-200 pt-2"
+          >
+            <strong>Lưu ý:</strong> Thông tin tổng hợp từ nghị quyết thành lập
+            và điều tra dân số.
+          </div>
+        </div>
+
+        <!-- CỘT 2: HÌNH ẢNH -->
+        <div>
+          <img
+            src="img/hai-phong.jpg"
+            alt="Hải Phòng"
+            class="w-full object-contain mt-20"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- PHẦN 3: LỊCH SỬ -->
+    <section
+      id="history"
+      class="relative flex justify-center text-gray-800 py-24 bg-white"
+    >
+      <div class="relative z-[2] fade-up max-w-6xl mx-auto px-6">
+        <h1
+          class="text-3xl font-bold text-sky-700 my-2 text-center mb-8 section-title"
+        >
+          Lịch sử hình thành
+        </h1>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <!-- CỘT 1: NỘI DUNG CHI TIẾT -->
+          <div class="prose prose-sm max-w-none">
+            <p class="text-gray-600 leading-relaxed my-4">
+              Vùng đất Ninh Giang ngày nay có lịch sử định cư và phát triển lâu
+              đời, với nhiều tên gọi và sự kiện quan trọng qua các triều đại.
+            </p>
+            <p class="text-gray-600 leading-relaxed my-4">
+              <strong>Thời kỳ cổ đại đến thế kỷ X:</strong> Kết quả khảo cổ học
+              tại vùng lân cận cho thấy, cư dân đã sinh sống ở vùng đất này từ
+              trước Công Nguyên. Vào năm 40, cuộc khởi nghĩa của Hai Bà Trưng
+              cũng đã diễn ra ở vùng Hạ Hồng, và tướng Đô Lượng của Hai Bà từng
+              đóng quân ở khu vực Hiệp Lực ngày nay. Đầu thế kỷ X, làng Cúc Bồ
+              (nay là xã Kiến Quốc) là nơi Khúc Thừa Dụ chiêu binh mã, gây dựng
+              cơ nghiệp, mở đầu kỷ nguyên tự chủ.
+            </p>
+            <p class="text-gray-600 leading-relaxed my-4">
+              <strong>Các triều đại phong kiến:</strong> Trước triều Trần, vùng
+              đất này thuộc huyện Đồng Lợi. Đời vua Lê Thái Tổ, huyện Đồng Lợi
+              được đổi thành Đồng Lại. Dưới thời vua Lê Thánh Tông (1460-1469),
+              đơn vị hành chính phủ Hạ Hồng được thành lập, quản lý 4 huyện,
+              trong đó có huyện Vĩnh Lại - tiền thân của huyện Ninh Giang sau
+              này. Đến năm 1822, vua Minh Mạng đổi tên phủ Hạ Hồng thành phủ
+              Ninh Giang, với ý nghĩa là "vùng sông nước an toàn".
+            </p>
+            <p class="text-gray-600 leading-relaxed my-4">
+              <strong>Thời kỳ Pháp thuộc và sau năm 1954:</strong> Năm 1919,
+              chính quyền thuộc địa Pháp bỏ cấp phủ, tên gọi Ninh Giang chính
+              thức được sử dụng để thay thế cho tên gọi cũ là Vĩnh Lại. Trong
+              kháng chiến chống Pháp, Ninh Giang là một quận thuộc tỉnh Vĩnh
+              Ninh. Sau năm 1954, huyện Ninh Giang thuộc tỉnh Hải Dương, sau đó
+              sáp nhập vào tỉnh Hải Hưng (năm 1968). Ngày 1/4/1979, huyện Ninh
+              Giang được sáp nhập với huyện Thanh Miện thành huyện Ninh Thanh,
+              đến tháng 3/1996 thì lại được tách ra thành huyện Ninh Giang và
+              huyện Thanh Miện như cũ.
+            </p>
+            <p class="text-gray-600 leading-relaxed my-4">
+              <strong>Quá trình chuyển đổi gần đây:</strong> Theo chủ trương sắp
+              xếp lại đơn vị hành chính, một xã mới thuộc thành phố Hải Phòng đã
+              được thành lập và mang tên xã Ninh Giang. Xã mới này được hình
+              thành chủ yếu từ việc sáp nhập thị trấn Ninh Giang và các xã Vĩnh
+              Hòa, Hồng Dụ, Hiệp Lực. Việc lựa chọn tên gọi "Ninh Giang" nhằm
+              giữ lại những giá trị truyền thống cốt lõi của vùng đất này.
+            </p>
+          </div>
+
+          <!-- CỘT 2: BẢNG TÓM TẮT -->
+          <div>
+            <h2 class="text-xl font-bold text-sky-700 mb-4">
+              Tóm tắt các mốc lịch sử quan trọng
+            </h2>
+            <div class="overflow-x-auto">
+              <table
+                class="min-w-full divide-y divide-gray-200 bg-white shadow-sm border border-slate-200"
+              >
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Thời Kỳ
+                    </th>
+                    <th
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Sự Kiện / Tên Gọi Chính
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                    >
+                      Trước thế kỷ X
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">
+                      Cư dân sinh sống từ trước Công nguyên. Gắn liền với khởi
+                      nghĩa Hai Bà Trưng (năm 40) và hoạt động của Khúc Thừa Dụ.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                    >
+                      Triều Trần về trước
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">
+                      Thuộc huyện Đồng Lợi.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                    >
+                      Thời Lê Sơ (1460-1469)
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">
+                      Thành lập phủ Hạ Hồng, quản lý huyện Vĩnh Lại.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                    >
+                      Năm 1822
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">
+                      Vua Minh Mạng đổi phủ Hạ Hồng thành phủ Ninh Giang.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                    >
+                      Năm 1919
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">
+                      Chính quyền Pháp bỏ cấp phủ, tên gọi Ninh Giang chính thức
+                      thay thế cho Vĩnh Lại.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                    >
+                      Năm 1979 - 1996
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">
+                      Sáp nhập với huyện Thanh Miện thành huyện Ninh Thanh, sau
+                      đó lại tách ra.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                    >
+                      Giai đoạn gần đây
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">
+                      Thành lập xã Ninh Giang thuộc TP. Hải Phòng trên cơ sở sáp
+                      nhập các đơn vị hành chính cũ.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-4 text-sm text-gray-500">
+              <strong>Lưu ý:</strong> Thông tin tổng hợp từ các tài liệu lịch sử
+              và nghị quyết hành chính.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHẦN 4: DI TÍCH & VĂN HÓA -->
+    <section
+      id="culture"
+      class="relative flex justify-center text-gray-800 py-24 bg-white"
+    >
+      <div class="relative z-[2] fade-up max-w-6xl mx-auto px-6">
+        <h2
+          class="text-3xl font-bold mb-10 text-sky-700 text-center section-title"
+        >
+          Di tích & Văn hóa
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <!-- CỘT 1: DI TÍCH & LỄ HỘI -->
+          <div>
+            <h3 class="text-xl font-semibold text-sky-700 mb-3">
+              Đời sống văn hóa & lễ hội
+            </h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Đời sống văn hóa tinh thần nơi đây vô cùng phong phú với nhiều lễ
+              hội truyền thống được tổ chức hàng năm. Ba di sản tiêu biểu đã
+              được công nhận là
+              <strong>Di sản Văn hóa phi vật thể Quốc gia</strong>:
+            </p>
+            <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+              <li>Lễ hội truyền thống đền Tranh</li>
+              <li>Lễ hội đình Trịnh Xuyên</li>
+              <li>Nghệ thuật múa rối nước Hồng Phong</li>
+            </ul>
+
+            <p class="text-gray-700 leading-relaxed mb-3">
+              <strong>Lễ hội Đền Tranh</strong> là một trong những lễ hội lớn
+              nhất, diễn ra hai kỳ chính trong năm:
+            </p>
+            <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+              <li>
+                <strong>Kỳ thứ nhất:</strong> Từ 10 đến 20 tháng 2 Âm lịch
+                (trọng hội ngày 14/2 — tương truyền là ngày sinh của Quan lớn).
+              </li>
+              <li>
+                <strong>Kỳ thứ hai:</strong> Từ 10 đến 20 tháng 8 Âm lịch (lễ tạ
+                ơn).
+              </li>
+            </ul>
+
+            <p class="text-gray-700 leading-relaxed mb-3">
+              Các nghi lễ và trò chơi dân gian đặc sắc bao gồm:
+            </p>
+            <ul class="list-disc list-inside text-gray-700 space-y-1">
+              <li>Lễ rước nước, lễ mộc dục</li>
+              <li>Thi pháo đất, đấu vật, chọi gà</li>
+              <li>Cờ tướng, đi cầu kiều, bắt trạch trong chum…</li>
+            </ul>
+          </div>
+
+          <!-- CỘT 2: LÀNG NGHỀ & ẨM THỰC -->
+          <div>
+            <h3 class="text-xl font-semibold text-sky-700 mb-3">
+              Làng nghề & Ẩm thực
+            </h3>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              Bên cạnh các giá trị văn hóa tâm linh, Ninh Giang còn nổi tiếng
+              với những làng nghề truyền thống và đặc sản ẩm thực đậm chất quê
+              hương:
+            </p>
+
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+              <li>
+                <strong>Nghề làm bánh gai:</strong> Một đặc sản nổi tiếng, gắn
+                liền với tên đất, tên làng, chủ yếu tập trung ở thị trấn Ninh
+                Giang và các xã lân cận.
+              </li>
+              <li>
+                <strong>Nghề mộc, chạm khắc:</strong> Tập trung ở thôn Cúc Bồ,
+                xã Kiến Quốc, nổi tiếng với các sản phẩm tinh xảo, mang đậm nét
+                văn hóa dân gian.
+              </li>
+            </ul>
+
+            <div class="mt-8">
+              <img
+                src="img/hoitranh.jpg"
+                alt="Lễ hội Đền Tranh"
+                class="w-full rounded-lg shadow-md object-cover"
+              />
+              <p class="text-sm text-gray-500 mt-2 text-center">
+                Hình ảnh: Lễ hội Đền Tranh – Di sản văn hóa phi vật thể Quốc
+                gia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHẦN 5: TIN TỨC & HOẠT ĐỘNG -->
+    <section
+      id="news"
+      class="relative flex items-center justify-center text-center bg-white"
+    >
+      <div class="relative z-[2] fade-up max-w-2xl">
+        <h2 class="text-3xl font-bold mb-4 text-sky-700 section-title">
+          Tin tức & Hoạt động
+        </h2>
+        <p class="text-lg text-gray-700">
+          Cập nhật những hoạt động ngoại khóa, sự kiện và tin tức nổi bật của
+          thầy và trò trường THPT Khúc Thừa Dụ.
+        </p>
+      </div>
+    </section>
+
+    <!-- SCRIPT TỰ ĐỘNG GẠCH CHÂN + HEADER ĐỔI MÀU -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll("section");
+        const links = document.querySelectorAll("nav a");
+        const header = document.getElementById("header");
+
+        let hideTimeout;
+
+        function activateLink() {
+          let currentIndex = -1;
+
+          sections.forEach((section, i) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 150 && rect.bottom > 150) {
+              currentIndex = i;
+            }
+          });
+
+          links.forEach((link) => link.classList.remove("active-link"));
+          if (currentIndex >= 0) {
+            links[currentIndex].classList.add("active-link");
+          }
+
+          // Đổi màu header khi cuộn
+          if (window.scrollY > 50) {
+            header.classList.add("bg-[rgba(0,0,0,0.3)]", "shadow-md");
+            header.classList.remove("bg-[rgba(255,255,255,0.06)]");
+          } else {
+            header.classList.remove("bg-[rgba(0,0,0,0.3)]", "shadow-md");
+            header.classList.add("bg-[rgba(255,255,255,0.06)]");
+          }
+        }
+
+        function showHeader() {
+          header.style.transform = "translateY(0)";
+          header.style.transition = "transform 0.4s ease";
+        }
+
+        function hideHeader() {
+          header.style.transform = "translateY(-100%)";
+          header.style.transition = "transform 0.4s ease";
+        }
+
+        function startHideTimer() {
+          clearTimeout(hideTimeout);
+          hideTimeout = setTimeout(() => {
+            hideHeader();
+          }, 3000);
+        }
+
+        // Khi cuộn → hiện header + cập nhật active link + đếm lại 3s
+        window.addEventListener("scroll", () => {
+          showHeader();
+          activateLink();
+          startHideTimer();
+        });
+
+        // Khởi động ban đầu
+        activateLink();
+        startHideTimer();
+      });
+    </script>
   </body>
 </html>
