@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trường THPT Khúc Thừa Dụ</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      /* --- NỀN TRANG --- */
+      #homepage {
+        position: relative;
+        background-image: url("img/schoolbg.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      #homepage::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+      }
+
+      header {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* --- HIỆU ỨNG GẠCH CHÂN --- */
+      nav a {
+        position: relative;
+        text-decoration: none;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background-color: #93c5fd;
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      /* --- HIỆU ỨNG FADE-UP KHI LOAD TRANG --- */
+      @keyframes fadeUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-up {
+        animation: fadeUp 1s ease forwards;
+      }
+    </style>
+  </head>
+
+  <body class="bg-white h-[200vh]">
+    <!-- HEADER -->
+      <header class="sticky top-0 z-50 bg-white/10 backdrop-blur-sm shadow-sm">
+        <div class="max-w-7xl mx-auto flex items-center px-6 h-16">
+          <nav
+            class="flex-1 flex justify-center items-center space-x-14 mx-4 hidden md:flex"
+          >
+            <a
+              href="#"
+              class="text-white font-semibold text-md hover:text-blue-300 transition"
+              >Trang chủ</a
+            >
+            <a
+              href="#"
+              class="text-white font-semibold text-md hover:text-blue-300 transition"
+              >Giới thiệu</a
+            >
+            <a
+              href="#"
+              class="text-white font-semibold text-md hover:text-blue-300 transition"
+              >Di tích & Văn hóa</a
+            >
+            <a
+              href="#"
+              class="text-white font-semibold text-md hover:text-blue-300 transition"
+              >Tin tức & Hoạt động</a
+            >
+          </nav>
+        </div>
+      </header>
+    <div class="h-[100vh]" id="homepage">
+      <!-- NỘI DUNG CHÍNH -->
+      <div
+        class="absolute inset-0 flex flex-col items-center mt-40 text-center text-white z-10 fade-up"
+      >
+        <img
+          src="img/logo.png"
+          alt="Logo"
+          class="w-28 mb-4 rounded-full shadow-lg"
+        />
+        <h1 class="text-4xl font-bold my-4">Trường THPT Khúc Thừa Dụ</h1>
+        <a
+          href="#"
+          class="relative text-white font-semibold text-lg transition duration-300 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-white hover:after:w-full after:transition-all after:duration-300"
+        >
+          Tham gia mini game tại đây
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
