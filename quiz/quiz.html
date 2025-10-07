@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trắc nghiệm 50 câu</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        min-height: 100vh;
+        background-attachment: fixed;
+      }
+      .card {
+        backdrop-filter: blur(6px);
+        background: rgba(255, 255, 255, 0.9);
+      }
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 60;
+      }
+      .modal-backdrop.show { display: flex; }
+      .modal-card {
+        background: #ffffff;
+        width: min(92vw, 560px);
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        transform: translateY(20px) scale(0.98);
+        opacity: 0;
+        animation: popIn 380ms ease forwards;
+      }
+      @keyframes popIn {
+        to { transform: translateY(0) scale(1); opacity: 1; }
+      }
+      .correct { color: #16a34a; }
+      .incorrect { color: #dc2626; }
+      .question-block { border-radius: 12px; border: 1px solid #e5e7eb; background: #f3f4f6; }
+      .option:hover { background-color: #f3f4f6; }
+      /* Confetti canvas */
+      #confetti {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 70;
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="text-gray-800 bg-gray-100">
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+      <header class="mb-6">
+        <h1 class="text-2xl sm:text-3xl font-bold text-sky-700">Bộ 50 câu hỏi ngẫu nhiên</h1>
+        <p class="text-gray-700 mt-1">Mỗi câu hỏi có 10 giây để trả lời, chọn 1 đáp án đúng</p>
+      </header>
+
+      <section id="quiz" class="space-y-4">
+        <div id="loading" class="text-gray-500">Đang tải câu hỏi…</div>
+        <form id="quizForm" class="hidden space-y-4" autocomplete="off">
+          <div class="flex items-center justify-between bg-white rounded-lg p-3 border border-slate-200">
+            <div id="progress" class="font-semibold text-sky-700">Câu 1/50</div>
+            <div class="flex items-center gap-2">
+              <span class="text-gray-500">Thời gian:</span>
+              <span id="timer" class="px-2 py-1 rounded bg-amber-100 text-amber-700 font-semibold">10s</span>
+            </div>
+          </div>
+          <div id="questionBlock" class="question-block p-4 sm:p-5" style="background-color: white !important;"></div>
+          <div id="options" class="grid gap-2 p-4 sm:p-5 rounded-lg border border-slate-200 bg-white"></div>
+          <div class="flex items-center gap-3 pt-2">
+            <button id="prevBtn" type="button" class="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200">Câu trước</button>
+            <button id="nextBtn" type="button" class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Câu tiếp</button>
+            <button id="submitBtn" type="submit" class="ml-auto px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Nộp bài</button>
+          </div>
+          <span id="resultMsg" class="ml-2 text-sm"></span>
+        </form>
+      </section>
+    </main>
+
+    <!-- Modal chúc mừng -->
+    <div id="congratsModal" class="modal-backdrop">
+      <div class="modal-card p-6 sm:p-8 text-center">
+        <div class="text-4xl mb-3">🎉</div>
+        <h2 class="text-2xl font-bold mb-2">Chúc mừng!</h2>
+        <p class="text-gray-600 mb-6">Bạn đã trả lời đúng tất cả 5/5 câu hỏi.</p>
+        <div class="flex items-center justify-center gap-3">
+          <button id="closeModal" class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Tiếp tục</button>
+          <button id="playAgain" class="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200">Làm lại</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confetti canvas -->
+    <canvas id="confetti"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      // Utility: shuffle and sample
+      function shuffle(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+      function sample(arr, n) { return shuffle(arr).slice(0, n); }
+
+      // Parse question.txt with format:
+      // 1. Câu hỏi
+      // A. ...\nB. ...\nC. ...\nD. ...\nĐáp án: B
+      function parseQuestionsFromText(text) {
+        const lines = text.split(/\r?\n/);
+        const questions = [];
+        let cur = null;
+        const optIndex = { A: 0, B: 1, C: 2, D: 3 };
+
+        for (let raw of lines) {
+          const line = raw.trim();
+          if (!line) continue;
+
+          const qMatch = line.match(/^\d+\.?\s*(.+)$/);
+          if (qMatch) {
+            if (cur && typeof cur.answer === 'number') questions.push(cur);
+            cur = { question: qMatch[1].trim(), options: [] };
+            continue;
+          }
+
+          const oMatch = line.match(/^([A-Da-d])\.?\s*(.+)$/);
+          if (oMatch && cur) {
+            const letter = oMatch[1].toUpperCase();
+            const textOpt = oMatch[2].trim();
+            // Ensure array has 4 slots
+            if (!cur.options) cur.options = [];
+            cur.options[optIndex[letter]] = textOpt;
+            continue;
+          }
+
+          // Answer line: allow various encodings, just capture trailing A-D after ':'
+          const aMatch = line.match(/:\s*([A-Da-d])\s*$/);
+          if (aMatch && cur) {
+            const letter = aMatch[1].toUpperCase();
+            cur.answer = optIndex[letter];
+            continue;
+          }
+        }
+        if (cur && typeof cur.answer === 'number') questions.push(cur);
+
+        // Normalize: filter valid items only
+        return questions.filter(q => q && q.question && Array.isArray(q.options) && q.options.filter(Boolean).length === 4 && typeof q.answer === 'number');
+      }
+
+      // Fallback embedded questions (dùng khi không fetch được tệp)
+      const FALLBACK = [
+        { question: 'Thủ đô của Việt Nam là?', options: ['Hồ Chí Minh', 'Hà Nội', 'Đà Nẵng', 'Huế'], answer: 1 },
+        { question: '2 + 3 = ?', options: ['4', '5', '6', '7'], answer: 1 },
+        { question: 'Biển số quốc gia Việt Nam là?', options: ['VN', 'VT', 'VI', 'VV'], answer: 0 },
+        { question: 'Màu lá cây là?', options: ['Đỏ', 'Vàng', 'Xanh lá', 'Tím'], answer: 2 },
+        { question: 'HTML là viết tắt của?', options: ['Hyperlinks and Text Markup Language', 'Home Tool Markup Language', 'HyperText Markup Language', 'Hyper Text Makeup Language'], answer: 2 },
+        { question: 'Tháng có 28 ngày là?', options: ['Tháng 2', 'Tháng 4', 'Tháng 6', 'Tháng 9'], answer: 0 },
+        { question: '1 giờ có bao nhiêu phút?', options: ['30', '45', '50', '60'], answer: 3 },
+        { question: 'CSS dùng để?', options: ['Tạo cấu trúc', 'Trang trí giao diện', 'Lưu dữ liệu', 'Tạo máy chủ'], answer: 1 }
+      ];
+
+      // One-question rendering
+      function renderCurrentQuestion(idx) {
+        const q = CURRENT[idx];
+        const block = document.getElementById('questionBlock');
+        const opts = document.getElementById('options');
+        const progress = document.getElementById('progress');
+        const letters = ['A','B','C','D'];
+        progress.textContent = `Câu ${idx + 1}/${CURRENT.length}`;
+        block.innerHTML = `<div class="font-semibold mb-3">${q.question}</div>`;
+        opts.innerHTML = q.options.map((opt, i) => {
+          const checked = answers[idx] === i ? 'checked' : '';
+          return `
+            <label class=\"option flex items-start gap-2 p-2 rounded cursor-pointer\">
+              <input type="radio" name="q" value="${i}" class="mt-1" ${checked} />
+              <span><strong>${letters[i]}.</strong> ${opt}</span>
+            </label>`;
+        }).join('');
+        // attach listeners for options to save answer
+          opts.querySelectorAll('input[name="q"]').forEach((el) => {
+            el.addEventListener('change', (e) => {
+              answers[idx] = Number(e.target.value);
+              
+            });
+          });
+        // enable/disable nav buttons
+          document.getElementById('prevBtn').disabled = idx === 0;
+          document.getElementById('nextBtn').disabled = idx === CURRENT.length - 1;
+          
+        }
+
+
+      // Confetti effect (simple)
+      function startConfetti(duration = 3500) {
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        const dpr = window.devicePixelRatio || 1;
+        const resize = () => {
+          canvas.width = innerWidth * dpr;
+          canvas.height = innerHeight * dpr;
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.scale(dpr, dpr);
+        };
+        resize();
+        canvas.style.display = 'block';
+
+        const colors = ['#fbbf24','#34d399','#60a5fa','#f472b6','#f87171','#a78bfa'];
+        const pieces = Array.from({ length: 160 }).map(() => ({
+          x: Math.random() * innerWidth,
+          y: Math.random() * -innerHeight,
+          r: Math.random() * 8 + 4,
+          c: colors[Math.floor(Math.random() * colors.length)],
+          vy: Math.random() * 2 + 2,
+          vx: (Math.random() - 0.5) * 2,
+          rot: Math.random() * Math.PI,
+          vr: (Math.random() - 0.5) * 0.2,
+        }));
+
+        let stopped = false;
+        const endAt = performance.now() + duration;
+        function tick(now) {
+          if (stopped) return;
+          ctx.clearRect(0, 0, innerWidth, innerHeight);
+          for (const p of pieces) {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rot += p.vr;
+            if (p.y > innerHeight + 20) { p.y = -10; p.x = Math.random() * innerWidth; }
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot);
+            ctx.fillStyle = p.c;
+            ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r * 0.6);
+            ctx.restore();
+          }
+          if (now < endAt) requestAnimationFrame(tick); else stop();
+        }
+        function stop() {
+          stopped = true;
+          canvas.style.display = 'none';
+          ctx.clearRect(0, 0, innerWidth, innerHeight);
+        }
+        const onResize = () => resize();
+        window.addEventListener('resize', onResize);
+        setTimeout(() => window.removeEventListener('resize', onResize), duration + 1000);
+        requestAnimationFrame(tick);
+      }
+
+      // Modal helpers
+      const modal = {
+        el: null,
+        open() { this.el.classList.add('show'); startConfetti(); },
+        close() { this.el.classList.remove('show'); }
+      };
+
+      // Load and init
+      const QUESTION_COUNT = 50;
+      let ALL_QUESTIONS = [];
+      let CURRENT = [];
+      let answers = [];
+      let currentIndex = 0;
+      let timer = null;
+      let timeLeft = 10;
+
+      async function loadQuestions() {
+        const loading = document.getElementById('loading');
+        const form = document.getElementById('quizForm');
+        try {
+          // Because this file is in quiz/, fetch local question.txt next to it
+          const res = await fetch('question.txt', { cache: 'no-store' });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          const text = await res.text();
+          const parsed = parseQuestionsFromText(text);
+          ALL_QUESTIONS = parsed.length >= 5 ? parsed : FALLBACK;
+        } catch (e) {
+          ALL_QUESTIONS = FALLBACK;
+        }
+        loading.classList.add('hidden');
+        form.classList.remove('hidden');
+        pickAndRender();
+      }
+
+      function pickAndRender() {
+        const n = Math.min(QUESTION_COUNT, ALL_QUESTIONS.length);
+        CURRENT = sample(ALL_QUESTIONS, n);
+        answers = Array.from({ length: CURRENT.length }, () => null);
+        currentIndex = 0;
+        document.getElementById('resultMsg').textContent = '';
+        renderCurrentQuestion(currentIndex);
+        startTimer();
+      }
+
+      // Handle submit
+      function handleSubmit(ev) {
+        ev.preventDefault();
+        stopTimer();
+        let correct = 0;
+        for (let i = 0; i < CURRENT.length; i++) {
+          if (answers[i] !== null && answers[i] === CURRENT[i].answer) correct++;
+        }
+        Swal.fire({
+          icon: correct > 10 ? 'success' : 'info',
+          title: 'Kết quả',
+          html: `Bạn đúng <b>${correct}</b> / <b>${CURRENT.length}</b> câu`,
+          confirmButtonText: 'Làm lại',
+          showCancelButton: true,
+          cancelButtonText: 'Đóng'
+        }).then((res) => {
+          if (res.isConfirmed) pickAndRender();
+        });
+      }
+
+      function startTimer() {
+        stopTimer();
+        timeLeft = 10;
+        updateTimer();
+        timer = setInterval(() => {
+          timeLeft -= 1;
+          if (timeLeft <= 0) {
+            // Auto-advance if unanswered; else still advance to keep pace
+            const answered = answers[currentIndex] !== null;
+            if (currentIndex < CURRENT.length - 1) {
+              currentIndex++;
+              renderCurrentQuestion(currentIndex);
+              timeLeft = 10;
+              updateTimer();
+            } else {
+              stopTimer();
+              // auto show result at end
+              let correct = 0;
+              for (let i = 0; i < CURRENT.length; i++) if (answers[i] !== null && answers[i] === CURRENT[i].answer) correct++;
+              Swal.fire({
+                icon: correct > 10 ? 'success' : 'info',
+                title: 'Hết thời gian',
+                html: `Bạn đúng <b>${correct}</b> / <b>${CURRENT.length}</b> câu`,
+                confirmButtonText: 'Làm lại',
+                showCancelButton: true,
+                cancelButtonText: 'Đóng'
+              }).then((res) => { if (res.isConfirmed) pickAndRender(); });
+            }
+          } else {
+            updateTimer();
+          }
+        }, 1000);
+      }
+
+      function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+      function updateTimer() { document.getElementById('timer').textContent = `${timeLeft}s`; }
+
+      function goNext() {
+        if (currentIndex < CURRENT.length - 1) {
+          currentIndex++;
+          renderCurrentQuestion(currentIndex);
+          startTimer();
+        }
+      }
+      function goPrev() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          renderCurrentQuestion(currentIndex);
+          startTimer();
+        }
+      }
+
+      // Events
+      window.addEventListener('DOMContentLoaded', () => {
+        modal.el = document.getElementById('congratsModal');
+        document.getElementById('quizForm').addEventListener('submit', handleSubmit);
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        nextBtn.addEventListener('click', goNext);
+        prevBtn.addEventListener('click', goPrev);
+        loadQuestions();
+      });
+    </script>
+    <style>
+      .text-sky-700 { color: #1d4ed8 !important; }
+      .bg-sky-500 { background-color: #3b82f6 !important; }
+      .hover\:bg-sky-600:hover { background-color: #2563eb !important; }
+      .text-sky-600 { color: #2563eb !important; }
+      .border-sky-500 { border-color: #3b82f6 !important; }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('quizForm');
+        if (!form) return;
+        try { form.removeEventListener('submit', handleSubmit); } catch(e) {}
+        form.addEventListener('submit', function(ev) {
+          ev.preventDefault();
+          try { if (typeof stopTimer === 'function') stopTimer(); } catch(e) {}
+          var correct = 0;
+          try {
+            if (Array.isArray(CURRENT) && Array.isArray(answers)) {
+              for (var i = 0; i < CURRENT.length; i++) {
+                if (answers[i] !== null && answers[i] === CURRENT[i].answer) correct++;
+              }
+            }
+          } catch(e) {}
+          var total = (CURRENT && CURRENT.length) ? CURRENT.length : 0;
+          var answeredCount = 0;
+          try {
+            if (Array.isArray(answers)) {
+              for (var j = 0; j < answers.length; j++) {
+                if (answers[j] !== null && answers[j] !== undefined) answeredCount++;
+              }
+            }
+          } catch(e) {}
+          if (answeredCount < 10) {
+            Swal.fire({
+              icon: 'warning',
+              title: 'Chưa đủ 10 câu',
+              text: 'Bạn chưa trả lời đủ 10 câu.',
+              confirmButtonText: 'OK'
+            }).then(function () {
+              setTimeout(function() {
+                window.location.href = '../index.html';
+              }, 10000);
+            });
+            return;
+          }
+          Swal.fire({
+            icon: 'success',
+            title: 'Kết quả',
+            html: 'Bạn đúng <b>' + correct + '</b> / <b>' + total + '</b> câu',
+            confirmButtonText: 'OK'
+          }).then(function () {
+            setTimeout(function() {
+              window.location.href = '../index.html';
+            }, 10000);
+          });
+        }, { once: true });
+      });
+    </script>
+  </body>
+</html>
+
