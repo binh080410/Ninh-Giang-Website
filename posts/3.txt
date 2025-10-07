@@ -1,0 +1,4 @@
+{
+  "title": "Hoạt động tình nguyện vì cộng đồng",
+  "content": "Nhóm học sinh khối 11 đã tham gia hoạt động dọn vệ sinh môi trường tại khu dân cư và trồng cây xanh tại khuôn viên trường. Chương trình nhận được sự ủng hộ nhiệt tình của phụ huynh và địa phương."
+}

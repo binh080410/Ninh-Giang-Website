@@ -1,0 +1,4 @@
+{
+  "title": "Lễ khai giảng năm học mới",
+  "content": "Sáng nay, trường THPT Khắc Thừa Dụ tổ chức lễ khai giảng năm học mới trong không khí trang trọng và ấm áp. Thầy cô và học sinh đã cùng nhau phát động phong trào thi đua học tốt, rèn luyện tốt, quyết tâm đạt nhiều thành tích nổi bật trong năm học."
+}

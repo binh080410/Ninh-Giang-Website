@@ -1,0 +1,4 @@
+{
+  "title": "Thông báo tuyển sinh câu lạc bộ STEM",
+  "content": "Câu lạc bộ STEM của trường mở đợt tuyển thành viên mới.\n\n Học sinh quan tâm đăng ký tại phòng Đoàn - Đội. Nội dung sinh hoạt gồm robot, lập trình, khoa học ứng dụng và các dự án thực tế."
+}

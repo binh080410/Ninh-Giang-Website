@@ -54,8 +54,11 @@
   <body class="text-gray-800 bg-gray-100">
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
       <header class="mb-6">
+        <div class="mb-2 text-sm text-gray-600">
+          <a href="../index.html#home" class="hover:text-blue-600">← Trang chủ</a>
+        </div>
         <h1 class="text-2xl sm:text-3xl font-bold text-sky-700">Bộ 50 câu hỏi ngẫu nhiên</h1>
-        <p class="text-gray-700 mt-1">Mỗi câu hỏi có 10 giây để trả lời, chọn 1 đáp án đúng</p>
+        
       </header>
 
       <section id="quiz" class="space-y-4">
@@ -437,6 +440,41 @@
         }, { once: true });
       });
     </script>
+    <script>
+      // Ưu tiên lắng nghe sớm (capture) để chặn handler khác và bổ sung thông báo >5 câu
+      document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('quizForm');
+        if (!form || typeof Swal === 'undefined') return;
+        var SUBMIT_URL = '../post.html?id=1'; // Đổi sang URL đăng bài của bạn
+        form.addEventListener('submit', function(ev) {
+          try { ev.preventDefault(); ev.stopImmediatePropagation(); } catch(e) {}
+          try { if (typeof stopTimer === 'function') stopTimer(); } catch(e) {}
+          var correct = 0, total = (typeof CURRENT !== 'undefined' && CURRENT && CURRENT.length) ? CURRENT.length : 0;
+          var answeredCount = 0;
+          try {
+            if (Array.isArray(CURRENT) && Array.isArray(answers)) {
+              for (var i = 0; i < CURRENT.length; i++) {
+                if (answers[i] !== null && answers[i] === CURRENT[i].answer) correct++;
+              }
+            }
+            if (Array.isArray(answers)) {
+              for (var j = 0; j < answers.length; j++) {
+                if (answers[j] !== null && answers[j] !== undefined) answeredCount++;
+              }
+            }
+          } catch(e) {}
+          if (answeredCount < 10) {
+            Swal.fire({ icon: 'warning', title: 'Chưa đủ 10 câu', text: 'Bạn chưa trả lời đủ 10 câu.', confirmButtonText: 'OK' });
+            return;
+          }
+          var extra = (correct > 5)
+            ? '<div class="mt-2 text-sm text-gray-700">Chúc mừng bạn đã đúng trên 5 câu! Bạn có thể truy cập vào đường dẫn này để đăng bài: <a class="text-blue-600 underline" href="' + SUBMIT_URL + '">Đăng bài</a></div>'
+            : '';
+          Swal.fire({ icon: (correct > 10 ? 'success' : 'info'), title: 'Kết quả', html: 'Bạn đúng <b>' + correct + '</b> / <b>' + total + '</b> câu' + extra, confirmButtonText: 'OK' });
+        }, { capture: true });
+      });
+    </script>
   </body>
-</html>
+ </html>
+
 
