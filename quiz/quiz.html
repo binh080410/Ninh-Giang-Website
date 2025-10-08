@@ -57,7 +57,7 @@
         <div class="mb-2 text-sm text-gray-600">
           <a href="../index.html#home" class="hover:text-blue-600">← Trang chủ</a>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-bold text-sky-700">Bộ 50 câu hỏi ngẫu nhiên</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-sky-700">Bộ câu hỏi ngẫu nhiên</h1>
         
       </header>
 
@@ -74,7 +74,6 @@
           <div id="questionBlock" class="question-block p-4 sm:p-5" style="background-color: white !important;"></div>
           <div id="options" class="grid gap-2 p-4 sm:p-5 rounded-lg border border-slate-200 bg-white"></div>
           <div class="flex items-center gap-3 pt-2">
-            <button id="prevBtn" type="button" class="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200">Câu trước</button>
             <button id="nextBtn" type="button" class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Câu tiếp</button>
             <button id="submitBtn" type="submit" class="ml-auto px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Nộp bài</button>
           </div>
@@ -180,24 +179,20 @@
         opts.innerHTML = q.options.map((opt, i) => {
           const checked = answers[idx] === i ? 'checked' : '';
           return `
-            <label class=\"option flex items-start gap-2 p-2 rounded cursor-pointer\">
+            <label class="option flex items-start gap-2 p-2 rounded cursor-pointer">
               <input type="radio" name="q" value="${i}" class="mt-1" ${checked} />
               <span><strong>${letters[i]}.</strong> ${opt}</span>
             </label>`;
         }).join('');
         // attach listeners for options to save answer
-          opts.querySelectorAll('input[name="q"]').forEach((el) => {
-            el.addEventListener('change', (e) => {
-              answers[idx] = Number(e.target.value);
-              
-            });
+        opts.querySelectorAll('input[name="q"]').forEach((el) => {
+          el.addEventListener('change', (e) => {
+            answers[idx] = Number(e.target.value);
           });
+        });
         // enable/disable nav buttons
-          document.getElementById('prevBtn').disabled = idx === 0;
-          document.getElementById('nextBtn').disabled = idx === CURRENT.length - 1;
-          
-        }
-
+        document.getElementById('nextBtn').disabled = idx === CURRENT.length - 1;
+      }
 
       // Confetti effect (simple)
       function startConfetti(duration = 3500) {
@@ -263,7 +258,7 @@
       };
 
       // Load and init
-      const QUESTION_COUNT = 50;
+      const QUESTION_COUNT = 7;
       let ALL_QUESTIONS = [];
       let CURRENT = [];
       let answers = [];
@@ -299,24 +294,40 @@
         startTimer();
       }
 
-      // Handle submit
-      function handleSubmit(ev) {
-        ev.preventDefault();
+      // Tính điểm và hiển thị kết quả
+      function computeAndReport(source = 'submit') {
         stopTimer();
         let correct = 0;
         for (let i = 0; i < CURRENT.length; i++) {
           if (answers[i] !== null && answers[i] === CURRENT[i].answer) correct++;
         }
-        Swal.fire({
-          icon: correct > 10 ? 'success' : 'info',
-          title: 'Kết quả',
-          html: `Bạn đúng <b>${correct}</b> / <b>${CURRENT.length}</b> câu`,
-          confirmButtonText: 'Làm lại',
-          showCancelButton: true,
-          cancelButtonText: 'Đóng'
-        }).then((res) => {
-          if (res.isConfirmed) pickAndRender();
-        });
+        const SUBMIT_URL = '../post.html?id=1';
+        if (correct >= 5) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Chúc mừng!',
+            image: 'img/ceft.png',
+            html: `Bạn đã đúng <b>${correct}</b>/<b>${CURRENT.length}</b> câu.<br/>Bạn có thể truy cập đường link này để đóng góp bài viết: <a class="text-blue-600 underline" href="${SUBMIT_URL}">Đóng góp bài viết</a>`,
+            confirmButtonText: 'OK'
+          });
+        } else {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Không đạt!',
+            html: `Bạn chỉ đúng <b>${correct}</b>/<b>${CURRENT.length}</b> câu.<br/>Hệ thống sẽ chuyển về trang chủ sau 30 giây.`,
+            confirmButtonText: 'OK',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+          });
+          setTimeout(() => { window.location.href = '../index.html'; }, 30000);
+        }
+      }
+
+      // Handle submit
+      function handleSubmit(ev) {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        computeAndReport('submit');
       }
 
       function startTimer() {
@@ -327,25 +338,14 @@
           timeLeft -= 1;
           if (timeLeft <= 0) {
             // Auto-advance if unanswered; else still advance to keep pace
-            const answered = answers[currentIndex] !== null;
             if (currentIndex < CURRENT.length - 1) {
               currentIndex++;
               renderCurrentQuestion(currentIndex);
               timeLeft = 10;
               updateTimer();
             } else {
-              stopTimer();
-              // auto show result at end
-              let correct = 0;
-              for (let i = 0; i < CURRENT.length; i++) if (answers[i] !== null && answers[i] === CURRENT[i].answer) correct++;
-              Swal.fire({
-                icon: correct > 10 ? 'success' : 'info',
-                title: 'Hết thời gian',
-                html: `Bạn đúng <b>${correct}</b> / <b>${CURRENT.length}</b> câu`,
-                confirmButtonText: 'Làm lại',
-                showCancelButton: true,
-                cancelButtonText: 'Đóng'
-              }).then((res) => { if (res.isConfirmed) pickAndRender(); });
+              // Câu cuối hết thời gian: tự động kết thúc và tính điểm
+              computeAndReport('timeout');
             }
           } else {
             updateTimer();
@@ -363,22 +363,14 @@
           startTimer();
         }
       }
-      function goPrev() {
-        if (currentIndex > 0) {
-          currentIndex--;
-          renderCurrentQuestion(currentIndex);
-          startTimer();
-        }
-      }
 
       // Events
       window.addEventListener('DOMContentLoaded', () => {
         modal.el = document.getElementById('congratsModal');
-        document.getElementById('quizForm').addEventListener('submit', handleSubmit);
+        const formEl = document.getElementById('quizForm');
+        formEl.addEventListener('submit', handleSubmit, { capture: true, once: false });
         const nextBtn = document.getElementById('nextBtn');
-        const prevBtn = document.getElementById('prevBtn');
         nextBtn.addEventListener('click', goNext);
-        prevBtn.addEventListener('click', goPrev);
         loadQuestions();
       });
     </script>
@@ -389,92 +381,5 @@
       .text-sky-600 { color: #2563eb !important; }
       .border-sky-500 { border-color: #3b82f6 !important; }
     </style>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var form = document.getElementById('quizForm');
-        if (!form) return;
-        try { form.removeEventListener('submit', handleSubmit); } catch(e) {}
-        form.addEventListener('submit', function(ev) {
-          ev.preventDefault();
-          try { if (typeof stopTimer === 'function') stopTimer(); } catch(e) {}
-          var correct = 0;
-          try {
-            if (Array.isArray(CURRENT) && Array.isArray(answers)) {
-              for (var i = 0; i < CURRENT.length; i++) {
-                if (answers[i] !== null && answers[i] === CURRENT[i].answer) correct++;
-              }
-            }
-          } catch(e) {}
-          var total = (CURRENT && CURRENT.length) ? CURRENT.length : 0;
-          var answeredCount = 0;
-          try {
-            if (Array.isArray(answers)) {
-              for (var j = 0; j < answers.length; j++) {
-                if (answers[j] !== null && answers[j] !== undefined) answeredCount++;
-              }
-            }
-          } catch(e) {}
-          if (answeredCount < 10) {
-            Swal.fire({
-              icon: 'warning',
-              title: 'Chưa đủ 10 câu',
-              text: 'Bạn chưa trả lời đủ 10 câu.',
-              confirmButtonText: 'OK'
-            }).then(function () {
-              setTimeout(function() {
-                window.location.href = '../index.html';
-              }, 10000);
-            });
-            return;
-          }
-          Swal.fire({
-            icon: 'success',
-            title: 'Kết quả',
-            html: 'Bạn đúng <b>' + correct + '</b> / <b>' + total + '</b> câu',
-            confirmButtonText: 'OK'
-          }).then(function () {
-            setTimeout(function() {
-              window.location.href = '../index.html';
-            }, 10000);
-          });
-        }, { once: true });
-      });
-    </script>
-    <script>
-      // Ưu tiên lắng nghe sớm (capture) để chặn handler khác và bổ sung thông báo >5 câu
-      document.addEventListener('DOMContentLoaded', function() {
-        var form = document.getElementById('quizForm');
-        if (!form || typeof Swal === 'undefined') return;
-        var SUBMIT_URL = '../post.html?id=1'; // Đổi sang URL đăng bài của bạn
-        form.addEventListener('submit', function(ev) {
-          try { ev.preventDefault(); ev.stopImmediatePropagation(); } catch(e) {}
-          try { if (typeof stopTimer === 'function') stopTimer(); } catch(e) {}
-          var correct = 0, total = (typeof CURRENT !== 'undefined' && CURRENT && CURRENT.length) ? CURRENT.length : 0;
-          var answeredCount = 0;
-          try {
-            if (Array.isArray(CURRENT) && Array.isArray(answers)) {
-              for (var i = 0; i < CURRENT.length; i++) {
-                if (answers[i] !== null && answers[i] === CURRENT[i].answer) correct++;
-              }
-            }
-            if (Array.isArray(answers)) {
-              for (var j = 0; j < answers.length; j++) {
-                if (answers[j] !== null && answers[j] !== undefined) answeredCount++;
-              }
-            }
-          } catch(e) {}
-          if (answeredCount < 10) {
-            Swal.fire({ icon: 'warning', title: 'Chưa đủ 10 câu', text: 'Bạn chưa trả lời đủ 10 câu.', confirmButtonText: 'OK' });
-            return;
-          }
-          var extra = (correct > 5)
-            ? '<div class="mt-2 text-sm text-gray-700">Chúc mừng bạn đã đúng trên 5 câu! Bạn có thể truy cập vào đường dẫn này để đăng bài: <a class="text-blue-600 underline" href="' + SUBMIT_URL + '">Đăng bài</a></div>'
-            : '';
-          Swal.fire({ icon: (correct > 10 ? 'success' : 'info'), title: 'Kết quả', html: 'Bạn đúng <b>' + correct + '</b> / <b>' + total + '</b> câu' + extra, confirmButtonText: 'OK' });
-        }, { capture: true });
-      });
-    </script>
   </body>
- </html>
-
-
+</html>

@@ -9,6 +9,7 @@
 
     <style>
       /* --- MENU UNDERLINE ANIMATION --- */
+
       nav a {
         position: relative;
         text-decoration: none;
@@ -45,10 +46,14 @@
       .fade-up {
         animation: fadeUp 1s ease forwards;
       }
+      @media (min-width: 1024px) {
+        /* chừa không gian sidebar bên phải */
+        #intro, #history, #culture, #news { margin-right: 22rem; }
+      }
     </style>
   </head>
 
-  <body class="m-0 font-inter text-white scroll-smooth">
+  <body class="m-0 font-inter text-white scroll-smooth bg-gray-100">
     <!-- HEADER -->
     <header
       id="header"
@@ -75,6 +80,24 @@
         
       </div>
     </header>
+    
+    <!-- Sidebar: Phụ lục + Tin mới (bên phải) -->
+    <aside id="tocSidebar" class="hidden lg:block fixed top-1/2 right-6 w-80 z-[40] -translate-y-1/2 transform opacity-0 pointer-events-none transition-opacity duration-300">
+      <div class="bg-white/95 backdrop-blur border border-slate-200 rounded-lg shadow-sm p-4">
+        <h3 class="text-base font-semibold text-gray-800 mb-2">Phụ lục</h3>
+        <ul class="space-y-1 text-sm">
+          <li><a class="text-blue-700 hover:underline" href="#home">Trang chủ</a></li>
+          <li><a class="text-blue-700 hover:underline" href="#intro">Giới thiệu</a></li>
+          <li><a class="text-blue-700 hover:underline" href="#history">Lịch sử</a></li>
+          <li><a class="text-blue-700 hover:underline" href="#culture">Văn hoá</a></li>
+          <li><a class="text-blue-700 hover:underline" href="#news">Tin tức</a></li>
+        </ul>
+      </div>
+      <div class="mt-4 bg-white/95 backdrop-blur border border-slate-200 rounded-lg shadow-sm p-4">
+        <h3 class="text-base font-semibold text-gray-800 mb-2">Tin mới</h3>
+        <ul id="sidebarNews" class="space-y-2 text-sm text-gray-700"></ul>
+      </div>
+    </aside>
 
     <!-- PHẦN 1: TRANG CHỦ -->
     <section
@@ -99,7 +122,7 @@
     <!-- PHẦN 2: GIỚI THIỆU -->
     <section
       id="intro"
-      class="relative flex justify-center text-gray-800 py-24"
+      class="relative flex justify-center text-gray-800 py-24 bg-white ml-12"
     >
       <div
         class="relative z-[2] fade-up max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-6"
@@ -171,11 +194,11 @@
     <!-- PHẦN 3: LỊCH SỬ -->
     <section
       id="history"
-      class="relative flex justify-center text-gray-800 py-24 bg-white"
+      class="relative flex justify-center text-gray-800 py-24 bg-white ml-12"
     >
       <div class="relative z-[2] fade-up max-w-6xl mx-auto px-6">
         <h1
-          class="text-3xl font-bold text-sky-700 my-2 text-center mb-8 section-title"
+          class="text-3xl font-bold text-sky-700 my-2 text-left mb-8 section-title"
         >
           Lịch sử hình thành
         </h1>
@@ -338,7 +361,7 @@
     <!-- PHẦN 4: DI TÍCH & VĂN HÓA -->
     <section
       id="culture"
-      class="relative flex justify-center text-gray-800 py-24 bg-white"
+      class="relative flex justify-center text-gray-800 py-24 bg-white ml-12"
     >
       <div class="relative z-[2] fade-up max-w-6xl mx-auto px-6">
         <h2
@@ -432,7 +455,7 @@
 
     <section
       id="news"
-      class="relative flex flex-col items-center justify-center text-center bg-white"
+      class="relative flex flex-col items-center justify-center text-center bg-white -[100vh] ml-12 h-[100vh]"
     >
       <div class="relative z-[2] fade-up max-w-2xl">
         <h2 class="text-3xl font-bold mb-4 text-sky-700 section-title">Tin tức & Hoạt động</h2>
@@ -685,6 +708,15 @@
             collected.push(p);
           }
           posts = collected;
+          // Populate sidebar news (top 5)
+          try {
+            const list = document.getElementById('sidebarNews');
+            if (list) {
+              list.innerHTML = posts.slice(0, 4).map(p =>
+                `<li><a class="text-blue-700 hover:underline" href="post.html?id=${p.id}">${escapeHTML(p.title)}</a></li>`
+              ).join('');
+            }
+          } catch (e) { console.warn('sidebar news error', e); }
           if (posts.length === 0) {
             ensureContainers();
             const grid = document.getElementById('postsGrid');
@@ -824,8 +856,30 @@
       </div>
     </footer>
     <script>document.getElementById('y2').textContent = new Date().getFullYear();</script>
+    <script>
+      // Hiển thị sidebar ở giữa, chỉ khi đã cuộn qua phần home
+      document.addEventListener('DOMContentLoaded', function() {
+        const toc = document.getElementById('tocSidebar');
+        const home = document.getElementById('home');
+        if (!toc || !home) return;
+        function updateSidebar() {
+          const r = home.getBoundingClientRect();
+          const headerH = 70; // gần bằng h-16
+          if (r.bottom <= headerH) {
+            toc.classList.remove('opacity-0','pointer-events-none');
+            toc.classList.add('opacity-100','pointer-events-auto');
+          } else {
+            toc.classList.add('opacity-0','pointer-events-none');
+            toc.classList.remove('opacity-100','pointer-events-auto');
+          }
+        }
+        window.addEventListener('scroll', updateSidebar);
+        updateSidebar();
+      });
+    </script>
   </body>
  </html>
+
 
 
 
