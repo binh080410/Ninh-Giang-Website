@@ -1,0 +1,4 @@
+{
+  "title": "Cập nhật thành tích học sinh giỏi",
+  "content": "Đội tuyển học sinh giỏi của trường đã đạt nhiều giải cao trong kỳ thi cấp tỉnh. Nhà trường gửi lời chúc mừng tới các em và thầy cô phụ trách. Những nỗ lực trong học tập đã mang lại kết quả xứng đáng."
+}
