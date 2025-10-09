@@ -1,4 +1,0 @@
-{
-  "title": "test 6",
-  "content": "test nội dung \n\n xuống dòng"
-}
