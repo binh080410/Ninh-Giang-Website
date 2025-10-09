@@ -1,0 +1,4 @@
+{
+"title": "Thông báo khai giảng",
+"content": "Sáng nay, trường tổ chức lễ khai giảng.\n\nCác nội dung chính:\n- Chào cờ\n- Phát biểu khai mạc\n- Trao thưởng học sinh\n\nChúc năm học mới thành công!"
+}
