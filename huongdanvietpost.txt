@@ -17,3 +17,9 @@ hoặc
 "images": ["img/thethao1.jpg", "img/thethao2.jpg"],
 "content": "Không khí sôi nổi tại ngày hội thể thao...\n\nCác môn thi đấu: bóng đá, kéo co, chạy tiếp sức."
 }
+
+// tải nội dung sửa nên web:
+- git add .
+-git commit -m "điền cgi cx đc nhm k đc trùng nhau"
+-git push origin main
+
