@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trắc nghiệm 50 câu</title>
+    <title>Trắc nghiệm</title>
     <link rel="icon" type="image/x-icon" href="/img/logo.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -98,7 +98,7 @@
     <!-- Confetti canvas -->
     <canvas id="confetti"></canvas>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script>
       // Utility: shuffle and sample
       function shuffle(arr) {
@@ -373,6 +373,29 @@
         nextBtn.addEventListener('click', goNext);
         loadQuestions();
       });
+      // Chặn truy cập lại nếu đã hoàn thành (chạy ngay khi tải script)
+      try {
+        if (sessionStorage.getItem('quizFinished') === 'true') {
+          window.location.replace('result.html');
+        }
+      } catch (e) {}
+      // Ghi đè báo điểm: chuyển trang kết quả thay vì hiện modal
+      try {
+        window.computeAndReport = function(source = 'submit') {
+          stopTimer();
+          let correct = 0;
+          for (let i = 0; i < CURRENT.length; i++) {
+            if (answers[i] !== null && answers[i] === CURRENT[i].answer) correct++;
+          }
+          try {
+            sessionStorage.setItem('quizScore', String(correct));
+            sessionStorage.setItem('quizTotal', String(CURRENT.length));
+            sessionStorage.setItem('quizFinished', 'true');
+            sessionStorage.setItem('quizSource', source);
+          } catch (e) {}
+          window.location.replace('result.html');
+        };
+      } catch (e) {}
     </script>
     <style>
       .text-sky-700 { color: #1d4ed8 !important; }

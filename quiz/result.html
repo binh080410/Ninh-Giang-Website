@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kết quả</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-gray-100 text-gray-800">
+    <main class="max-w-xl mx-auto px-4 py-10">
+      <div class="bg-white rounded-xl shadow p-6 border border-gray-200">
+        <h1 class="text-2xl font-bold text-sky-700 mb-2">Kết quả bài làm</h1>
+        <p id="summary" class="text-gray-700 mb-4">Đang tải...</p>
+        <div id="award" class="mt-2"></div>
+        <div class="flex gap-3 mt-6">
+          <a href="../index.html" class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Về trang chủ</a>
+          <button id="retryBtn" class="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200">Làm lại</button>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Đọc kết quả từ sessionStorage
+      const score = Number(sessionStorage.getItem('quizScore'));
+      const total = Number(sessionStorage.getItem('quizTotal'));
+      const summaryEl = document.getElementById('summary');
+      const awardEl = document.getElementById('award');
+      const retryBtn = document.getElementById('retryBtn');
+
+      function backHome() { window.location.replace('../index.html'); }
+
+      // Không có dữ liệu -> quay về trang chủ
+      if (!Number.isFinite(score) || !Number.isFinite(total) || total <= 0) {
+        backHome();
+      } else {
+        summaryEl.textContent = `Bạn đã trả lời đúng ${score}/${total} câu.`;
+
+        // Đủ số câu đúng -> hiển thị ảnh chứng nhận
+        const passed = score >= 5; // Giữ ngưỡng hiện tại
+        if (passed) {
+          const img = document.createElement('img');
+          img.alt = 'Chứng nhận';
+          img.className = 'rounded border border-gray-200';
+          // Yêu cầu: hiện ảnh img/ceft khi đạt; có fallback sang cerf.png nếu thiếu
+          img.src = '../img/ceft.png';
+          img.onerror = function(){ this.onerror=null; this.src='../img/cerf.png'; };
+          awardEl.appendChild(img);
+        }
+      }
+
+      // Làm lại: xóa trạng thái và quay lại trang làm bài
+      retryBtn.addEventListener('click', () => {
+        try {
+          sessionStorage.removeItem('quizScore');
+          sessionStorage.removeItem('quizTotal');
+          sessionStorage.removeItem('quizSource');
+          sessionStorage.removeItem('quizFinished');
+        } catch (e) {}
+        window.location.replace('quiz.html');
+      });
+    </script>
+  </body>
+  </html>
+

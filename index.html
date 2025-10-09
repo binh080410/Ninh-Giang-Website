@@ -48,7 +48,12 @@
       }
       @media (min-width: 1024px) {
         /* chừa không gian sidebar bên phải */
-        #intro, #history, #culture, #news { margin-right: 22rem; }
+        #intro,
+        #history,
+        #culture,
+        #news {
+          margin-right: 22rem;
+        }
       }
     </style>
   </head>
@@ -77,23 +82,41 @@
             >Tin tức & Hoạt động</a
           >
         </nav>
-        
       </div>
     </header>
-    
+
     <!-- Sidebar: Phụ lục + Tin mới (bên phải) -->
-    <aside id="tocSidebar" class="hidden lg:block fixed top-1/2 right-6 w-80 z-[40] -translate-y-1/2 transform opacity-0 pointer-events-none transition-opacity duration-300">
-      <div class="bg-white/95 backdrop-blur border border-slate-200 rounded-lg shadow-sm p-4">
+    <aside
+      id="tocSidebar"
+      class="hidden lg:block fixed top-1/2 right-6 w-80 z-[40] -translate-y-1/2 transform opacity-0 pointer-events-none transition-opacity duration-300"
+    >
+      <div
+        class="bg-white/95 backdrop-blur border border-slate-200 rounded-lg shadow-sm p-4"
+      >
         <h3 class="text-base font-semibold text-gray-800 mb-2">Phụ lục</h3>
         <ul class="space-y-1 text-sm">
-          <li><a class="text-blue-700 hover:underline" href="#home">Trang chủ</a></li>
-          <li><a class="text-blue-700 hover:underline" href="#intro">Giới thiệu</a></li>
-          <li><a class="text-blue-700 hover:underline" href="#history">Lịch sử</a></li>
-          <li><a class="text-blue-700 hover:underline" href="#culture">Văn hoá</a></li>
-          <li><a class="text-blue-700 hover:underline" href="#news">Tin tức</a></li>
+          <li>
+            <a class="text-blue-700 hover:underline" href="#home">Trang chủ</a>
+          </li>
+          <li>
+            <a class="text-blue-700 hover:underline" href="#intro"
+              >Giới thiệu</a
+            >
+          </li>
+          <li>
+            <a class="text-blue-700 hover:underline" href="#history">Lịch sử</a>
+          </li>
+          <li>
+            <a class="text-blue-700 hover:underline" href="#culture">Văn hoá</a>
+          </li>
+          <li>
+            <a class="text-blue-700 hover:underline" href="#news">Tin tức</a>
+          </li>
         </ul>
       </div>
-      <div class="mt-4 bg-white/95 backdrop-blur border border-slate-200 rounded-lg shadow-sm p-4">
+      <div
+        class="mt-4 bg-white/95 backdrop-blur border border-slate-200 rounded-lg shadow-sm p-4"
+      >
         <h3 class="text-base font-semibold text-gray-800 mb-2">Tin mới</h3>
         <ul id="sidebarNews" class="space-y-2 text-sm text-gray-700"></ul>
       </div>
@@ -113,7 +136,10 @@
         <h1 class="text-4xl font-bold my-8 mb-16 section-title">
           Trường THPT Khúc Thừa Dụ
         </h1>
-        <a href="quiz/quiz.html" class="text-md font-semibold px-6 py-3 rounded-xs bg-blue-500 hover:bg-blue-600 transition-colors">
+        <a
+          href="quiz/quiz.html"
+          class="text-md font-semibold px-6 py-3 rounded-xs bg-blue-500 hover:bg-blue-600 transition-colors"
+        >
           Làm bài trắc nghiệm
         </a>
       </div>
@@ -374,18 +400,40 @@
           <!-- CỘT 1: DI TÍCH & LỄ HỘI -->
           <div>
             <h3 class="text-xl font-semibold text-sky-700 mb-3">
-              Đời sống văn hóa & lễ hội
+              Đời sống văn hóa & Lễ hội
             </h3>
             <p class="text-gray-700 leading-relaxed mb-4">
-              Đời sống văn hóa tinh thần nơi đây vô cùng phong phú với nhiều lễ
-              hội truyền thống được tổ chức hàng năm. Ba di sản tiêu biểu đã
+              Đời sống văn hóa tinh thần nơi đây vô cùng phong phú, với nhiều lễ
+              hội truyền thống được tổ chức hàng năm. Trong đó, ba di sản đã
               được công nhận là
               <strong>Di sản Văn hóa phi vật thể Quốc gia</strong>:
             </p>
+
             <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
-              <li><a class="hover:underline" href="https://www.vietnamplus.vn/kham-pha-le-hoi-truyen-thong-den-tranh-di-san-van-hoa-phi-vat-the-quoc-gia-post1019564.vnp">Lễ hội truyền thống Đền Tranh</a></li>
-              <li><a class="hover:underline" href="https://baohaiphong.vn/dac-sac-le-hoi-truyen-thong-dinh-trinh-xuyen-375707.html">Lễ hội đình Trịnh Xuyên</a></li>
-              <li><a class="hover:underline" href="https://vovworld.vn/vi-VN/viet-nam-dat-nuoc-con-nguoi/phuong-mua-roi-nuoc-hong-phong-noi-nhung-nguoi-nong-dan-cung-la-nghe-sy-432061.vov">Nghệ thuật múa rối nước Hồng Phong</a></li>
+              <li>
+                <a
+                  class="hover:underline"
+                  href="https://www.vietnamplus.vn/kham-pha-le-hoi-truyen-thong-den-tranh-di-san-van-hoa-phi-vat-the-quoc-gia-post1019564.vnp"
+                  target="_blank"
+                  >Lễ hội truyền thống Đền Tranh</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:underline"
+                  href="https://baohaiphong.vn/dac-sac-le-hoi-truyen-thong-dinh-trinh-xuyen-375707.html"
+                  target="_blank"
+                  >Lễ hội đình Trịnh Xuyên</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:underline"
+                  href="https://vovworld.vn/vi-VN/viet-nam-dat-nuoc-con-nguoi/phuong-mua-roi-nuoc-hong-phong-noi-nhung-nguoi-nong-dan-cung-la-nghe-sy-432061.vov"
+                  target="_blank"
+                  >Nghệ thuật múa rối nước Hồng Phong</a
+                >
+              </li>
             </ul>
 
             <p class="text-gray-700 leading-relaxed mb-3">
@@ -404,36 +452,46 @@
             </ul>
 
             <p class="text-gray-700 leading-relaxed mb-3">
-              Các nghi lễ và trò chơi dân gian đặc sắc bao gồm:
+              Các nghi lễ và trò chơi dân gian đặc sắc bao gồm: lễ rước nước, lễ
+              mộc dục, thi pháo đất, đấu vật, chọi gà, cờ tướng, đi cầu kiều,
+              bắt trạch trong chum…
             </p>
-            <ul class="list-disc list-inside text-gray-700 space-y-1">
-              <li>Lễ rước nước, lễ mộc dục</li>
-              <li>Thi pháo đất, đấu vật, chọi gà</li>
-              <li>Cờ tướng, đi cầu kiều, bắt trạch trong chum…</li>
-            </ul>
+
+            <p class="text-gray-700 leading-relaxed mt-5">
+              <strong>Khu di tích tượng đài Chủ tịch Hồ Chí Minh:</strong> nằm
+              tại xã Hiệp Lực, là công trình văn hóa có ý nghĩa to lớn gắn với
+              sự kiện Bác Hồ về địa phương động viên phong trào chống úng và sản
+              xuất. Ngày 26/7/1962, Bác đã cùng bà con nông dân đạp guồng nước
+              tại cánh đồng Sao – một hình ảnh lịch sử đầy xúc động.
+            </p>
           </div>
 
-          <!-- CỘT 2: LÀNG NGHỀ & ẨM THỰC -->
+          <!-- CỘT 2: LÀNG NGHỀ, ẨM THỰC & HOẠT ĐỘNG -->
           <div>
             <h3 class="text-xl font-semibold text-sky-700 mb-3">
-              Làng nghề & Ẩm thực
+              Làng nghề, Ẩm thực & Hoạt động xã
             </h3>
             <p class="text-gray-700 leading-relaxed mb-4">
               Bên cạnh các giá trị văn hóa tâm linh, Ninh Giang còn nổi tiếng
-              với những làng nghề truyền thống và đặc sản ẩm thực đậm chất quê
-              hương:
+              với những làng nghề truyền thống và đặc sản ẩm thực mang đậm bản
+              sắc quê hương:
             </p>
 
-            <ul class="list-disc list-inside text-gray-700 space-y-2">
+            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
               <li>
-                <strong>Nghề làm bánh gai:</strong> Một đặc sản nổi tiếng, gắn
-                liền với tên đất, tên làng, chủ yếu tập trung ở thị trấn Ninh
-                Giang và các xã lân cận.
+                <strong>Nghề làm bánh gai:</strong> Đặc sản gắn liền với tên
+                đất, tên làng, chủ yếu tập trung tại thị trấn Ninh Giang và các
+                xã lân cận.
               </li>
               <li>
                 <strong>Nghề mộc, chạm khắc:</strong> Tập trung ở thôn Cúc Bồ,
                 xã Kiến Quốc, nổi tiếng với các sản phẩm tinh xảo, mang đậm nét
                 văn hóa dân gian.
+              </li>
+              <li>
+                <strong>Các chợ phiên truyền thống:</strong> Chợ Vé họp vào các
+                ngày 3, 8, 13, 18, 23 và 28 âm lịch, là nơi giao lưu buôn bán
+                nhộn nhịp, phản ánh đời sống kinh tế địa phương.
               </li>
             </ul>
 
@@ -458,7 +516,9 @@
       class="relative flex flex-col items-center justify-center text-center bg-white -[100vh] ml-12 h-[100vh]"
     >
       <div class="relative z-[2] fade-up max-w-2xl">
-        <h2 class="text-3xl font-bold mb-4 text-sky-700 section-title">Tin tức & Hoạt động</h2>
+        <h2 class="text-3xl font-bold mb-4 text-sky-700 section-title">
+          Tin tức & Hoạt động
+        </h2>
       </div>
     </section>
 
@@ -527,7 +587,10 @@
     </script>
 
     <style>
-      body.reader-open #header { transform: translateY(0) !important; transition: none !important; }
+      body.reader-open #header {
+        transform: translateY(0) !important;
+        transition: none !important;
+      }
     </style>
 
     <!-- Overlay Reader (uses site header above, no hide effect) -->
@@ -536,9 +599,17 @@
       <div class="relative h-full flex flex-col pt-16">
         <div class="flex-1 overflow-y-auto">
           <div class="max-w-3xl mx-auto px-4 sm:px-6 py-6">
-            <article id="overlayContent" class="max-w-none bg-white p-4 sm:p-6 rounded-lg border border-slate-200 shadow-sm"></article>
+            <article
+              id="overlayContent"
+              class="max-w-none bg-white p-4 sm:p-6 rounded-lg border border-slate-200 shadow-sm"
+            ></article>
             <div class="mt-4 flex justify-end">
-              <button id="closeOverlayBtn" class="text-gray-600 hover:text-gray-900 px-3 py-1 rounded-md border border-gray-300 bg-white">ÄÃ³ng</button>
+              <button
+                id="closeOverlayBtn"
+                class="text-gray-600 hover:text-gray-900 px-3 py-1 rounded-md border border-gray-300 bg-white"
+              >
+                ÄÃ³ng
+              </button>
             </div>
           </div>
         </div>
@@ -547,15 +618,15 @@
 
     <script>
       // Posts loader, cards, pagination, and overlay reader
-      document.addEventListener('DOMContentLoaded', () => {
-        const POSTS_DIR = 'posts';
+      document.addEventListener("DOMContentLoaded", () => {
+        const POSTS_DIR = "posts";
         const PAGE_SIZE = 4;
-        const postsGrid = document.getElementById('postsGrid');
-        const paginationEl = document.getElementById('pagination');
+        const postsGrid = document.getElementById("postsGrid");
+        const paginationEl = document.getElementById("pagination");
 
-        const overlay = document.getElementById('postOverlay');
-        const overlayContent = document.getElementById('overlayContent');
-        const closeOverlayBtn = document.getElementById('closeOverlayBtn');
+        const overlay = document.getElementById("postOverlay");
+        const overlayContent = document.getElementById("overlayContent");
+        const closeOverlayBtn = document.getElementById("closeOverlayBtn");
 
         let posts = [];
         let currentPage = 1;
@@ -563,31 +634,38 @@
         function ensureContainers() {
           // If postsGrid/pagination don't exist in HTML, inject them under the news section
           if (!postsGrid || !paginationEl) {
-            const news = document.getElementById('news');
+            const news = document.getElementById("news");
             if (news) {
-              let wrap = news.querySelector('[data-news-wrap]');
+              let wrap = news.querySelector("[data-news-wrap]");
               if (!wrap) {
-                wrap = document.createElement('div');
-                wrap.setAttribute('data-news-wrap', '');
-                wrap.className = 'max-w-6xl mx-auto px-6 mt-8';
+                wrap = document.createElement("div");
+                wrap.setAttribute("data-news-wrap", "");
+                wrap.className = "max-w-6xl mx-auto px-6 mt-8";
                 news.appendChild(wrap);
               }
-              const grid = document.getElementById('postsGrid') || document.createElement('div');
-              grid.id = 'postsGrid';
-              grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6';
+              const grid =
+                document.getElementById("postsGrid") ||
+                document.createElement("div");
+              grid.id = "postsGrid";
+              grid.className =
+                "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6";
               if (!grid.parentElement) wrap.appendChild(grid);
 
-              const pager = document.getElementById('pagination') || document.createElement('div');
-              pager.id = 'pagination';
-              pager.className = 'mt-8 flex items-center justify-center gap-2 mb-32';
+              const pager =
+                document.getElementById("pagination") ||
+                document.createElement("div");
+              pager.id = "pagination";
+              pager.className =
+                "mt-8 flex items-center justify-center gap-2 mb-32";
               if (!pager.parentElement) wrap.appendChild(pager);
             }
           }
         }
 
         function createCard(post) {
-          const card = document.createElement('div');
-          card.className = 'bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden';
+          const card = document.createElement("div");
+          card.className =
+            "bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden";
           const href = `post.html?id=${post.id}`;
           card.innerHTML = `
             <a href="${href}" class="block focus:outline-none focus:ring-2 focus:ring-blue-500/50">
@@ -602,54 +680,82 @@
         }
 
         function renderPagination(total, page) {
-          const pagination = document.getElementById('pagination');
+          const pagination = document.getElementById("pagination");
           if (!pagination) return;
-          pagination.innerHTML = '';
+          pagination.innerHTML = "";
           const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
           const makeBtn = (label, disabled, onClick, isActive = false) => {
-            const btn = document.createElement('button');
+            const btn = document.createElement("button");
             btn.textContent = label;
-            btn.className = `px-3 py-1 rounded-md border text-sm ${isActive ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-800 border-slate-300 hover:bg-slate-50'} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`;
-            if (!disabled) btn.addEventListener('click', onClick);
+            btn.className = `px-3 py-1 rounded-md border text-sm ${
+              isActive
+                ? "bg-blue-600 text-white border-blue-600"
+                : "bg-white text-gray-800 border-slate-300 hover:bg-slate-50"
+            } ${disabled ? "opacity-50 cursor-not-allowed" : ""}`;
+            if (!disabled) btn.addEventListener("click", onClick);
             return btn;
           };
 
-          pagination.appendChild(makeBtn('Trước', page <= 1, () => goTo(page - 1)));
+          pagination.appendChild(
+            makeBtn("Trước", page <= 1, () => goTo(page - 1))
+          );
           for (let p = 1; p <= totalPages; p++) {
-            pagination.appendChild(makeBtn(String(p), false, () => goTo(p), p === page));
+            pagination.appendChild(
+              makeBtn(String(p), false, () => goTo(p), p === page)
+            );
           }
-          pagination.appendChild(makeBtn('Sau', page >= totalPages, () => goTo(page + 1)));
+          pagination.appendChild(
+            makeBtn("Sau", page >= totalPages, () => goTo(page + 1))
+          );
         }
 
         function renderPage(page) {
           ensureContainers();
-          const grid = document.getElementById('postsGrid');
+          const grid = document.getElementById("postsGrid");
           if (!grid) return;
-          grid.innerHTML = '';
+          grid.innerHTML = "";
           const start = (page - 1) * PAGE_SIZE;
           const slice = posts.slice(start, start + PAGE_SIZE);
-          slice.forEach(p => grid.appendChild(createCard(p)));
+          slice.forEach((p) => grid.appendChild(createCard(p)));
           renderPagination(posts.length, page);
         }
 
         function goTo(page) {
           currentPage = page;
           renderPage(currentPage);
-          document.getElementById('news')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document
+            .getElementById("news")
+            ?.scrollIntoView({ behavior: "smooth", block: "start" });
         }
 
         function escapeHTML(str) {
-          return (str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+          return (str || "").replace(
+            /[&<>"']/g,
+            (c) =>
+              ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              }[c])
+          );
         }
 
         function renderOverlay(post) {
-          const title = escapeHTML(post.title || 'BÃ i viáº¿t');
-          const content = post.content || '';
+          const title = escapeHTML(post.title || "BÃ i viáº¿t");
+          const content = post.content || "";
           const blocks = content.split(/\r?\n\s*\r?\n/);
-          const htmlBlocks = blocks.map(b => `
-            <p class="text-gray-700 leading-relaxed mb-4">${escapeHTML(b).replace(/\r?\n/g, '<br>')}</p>
-          `).join('');
+          const htmlBlocks = blocks
+            .map(
+              (b) => `
+            <p class="text-gray-700 leading-relaxed mb-4">${escapeHTML(
+              b
+            ).replace(/\r?\n/g, "<br>")}</p>
+          `
+            )
+            .join("");
           overlayContent.innerHTML = `
             <h1 class="text-2xl font-bold text-gray-900 mb-4">${title}</h1>
             ${htmlBlocks}
@@ -658,19 +764,21 @@
 
         function openOverlay(post) {
           renderOverlay(post);
-          overlay.classList.remove('hidden');
-          document.body.classList.add('reader-open');
-          document.body.style.overflow = 'hidden';
+          overlay.classList.remove("hidden");
+          document.body.classList.add("reader-open");
+          document.body.style.overflow = "hidden";
         }
 
         function closeOverlay() {
-          overlay.classList.add('hidden');
-          document.body.classList.remove('reader-open');
-          document.body.style.overflow = '';
+          overlay.classList.add("hidden");
+          document.body.classList.remove("reader-open");
+          document.body.style.overflow = "";
         }
 
-        closeOverlayBtn.addEventListener('click', closeOverlay);
-        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeOverlay(); });
+        closeOverlayBtn.addEventListener("click", closeOverlay);
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) closeOverlay();
+        });
 
         async function fetchPost(index) {
           const url = `${POSTS_DIR}/${index}.txt`;
@@ -679,24 +787,28 @@
             if (!res.ok) return null;
             try {
               const data = await res.clone().json();
-              const title = data.title?.toString().trim() || `BÃ i viáº¿t ${index}`;
-              const content = data.content?.toString().trim() || '';
+              const title =
+                data.title?.toString().trim() || `BÃ i viáº¿t ${index}`;
+              const content = data.content?.toString().trim() || "";
               return normalizePost(index, title, content);
             } catch (_) {
               const text = await res.text();
               const lines = text.split(/\r?\n/);
               const title = (lines.shift() || `BÃ i viáº¿t ${index}`).trim();
-              const content = lines.join('\n').trim();
+              const content = lines.join("\n").trim();
               return normalizePost(index, title, content);
             }
           } catch (err) {
-            console.warn('Fetch error for', url, err);
+            console.warn("Fetch error for", url, err);
             return null;
           }
         }
 
         function normalizePost(id, title, content) {
-          const excerpt = content.length > 180 ? content.slice(0, 180).trim() + 'â€¦' : content;
+          const excerpt =
+            content.length > 180
+              ? content.slice(0, 180).trim() + "â€¦"
+              : content;
           return { id, title, content, excerpt };
         }
 
@@ -710,17 +822,27 @@
           posts = collected;
           // Populate sidebar news (top 5)
           try {
-            const list = document.getElementById('sidebarNews');
+            const list = document.getElementById("sidebarNews");
             if (list) {
-              list.innerHTML = posts.slice(0, 4).map(p =>
-                `<li><a class="text-blue-700 hover:underline" href="post.html?id=${p.id}">${escapeHTML(p.title)}</a></li>`
-              ).join('');
+              list.innerHTML = posts
+                .slice(0, 4)
+                .map(
+                  (p) =>
+                    `<li><a class="text-blue-700 hover:underline" href="post.html?id=${
+                      p.id
+                    }">${escapeHTML(p.title)}</a></li>`
+                )
+                .join("");
             }
-          } catch (e) { console.warn('sidebar news error', e); }
+          } catch (e) {
+            console.warn("sidebar news error", e);
+          }
           if (posts.length === 0) {
             ensureContainers();
-            const grid = document.getElementById('postsGrid');
-            if (grid) grid.innerHTML = '<div class="col-span-full text-center text-gray-600">ChÆ°a cÃ³ bÃ i viáº¿t.</div>';
+            const grid = document.getElementById("postsGrid");
+            if (grid)
+              grid.innerHTML =
+                '<div class="col-span-full text-center text-gray-600">ChÆ°a cÃ³ bÃ i viáº¿t.</div>';
             return;
           }
           renderPage(currentPage);
@@ -729,160 +851,205 @@
     </script>
     <script>
       // Chuẩn hóa hiển thị tiếng Việt cho các nội dung đã bị lỗi mã hóa
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener("DOMContentLoaded", () => {
         try {
-          document.title = 'Trường THPT Khắc Thừa Dụ';
+          document.title = "Trường THPT Khắc Thừa Dụ";
 
-          const nav = document.querySelector('header nav');
+          const nav = document.querySelector("header nav");
           if (nav) {
-            const links = nav.querySelectorAll('a');
-            if (links[0]) links[0].textContent = 'Trang chủ';
-            if (links[1]) links[1].textContent = 'Giới thiệu';
-            if (links[2]) links[2].textContent = 'Lịch sử';
-            if (links[3]) links[3].textContent = 'Di tích & Văn hóa';
-            if (links[4]) links[4].textContent = 'Tin tức & Hoạt động';
+            const links = nav.querySelectorAll("a");
+            if (links[0]) links[0].textContent = "Trang chủ";
+            if (links[1]) links[1].textContent = "Giới thiệu";
+            if (links[2]) links[2].textContent = "Lịch sử";
+            if (links[3]) links[3].textContent = "Di tích & Văn hóa";
+            if (links[4]) links[4].textContent = "Tin tức & Hoạt động";
           }
 
-          const heroH1 = document.querySelector('#home h1.section-title');
-          if (heroH1) heroH1.textContent = 'Trường THPT Khắc Thừa Dụ';
-          const heroBtn = document.querySelector('#home a[href="quiz/quiz.html"]');
-          if (heroBtn) heroBtn.textContent = 'Làm bài trắc nghiệm';
+          const heroH1 = document.querySelector("#home h1.section-title");
+          if (heroH1) heroH1.textContent = "Trường THPT Khắc Thừa Dụ";
+          const heroBtn = document.querySelector(
+            '#home a[href="quiz/quiz.html"]'
+          );
+          if (heroBtn) heroBtn.textContent = "Làm bài trắc nghiệm";
 
-          const intro = document.getElementById('intro');
+          const intro = document.getElementById("intro");
           if (intro) {
-            const introH1 = intro.querySelector('h1.section-title');
-            if (introH1) introH1.textContent = 'Xã Ninh Giang';
-            const introP = intro.querySelector('p.text-gray-600');
-            if (introP) introP.textContent = 'Xã Ninh Giang là một đơn vị hành chính mới thuộc thành phố Hải Phòng, chính thức được thành lập vào ngày 16/06/2025 theo Nghị quyết 1669/NQ-UBTVQH15. Xã được hình thành từ việc sáp nhập 4 đơn vị cũ: thị trấn Ninh Giang, xã Vĩnh Hòa, xã Hồng Dụ và xã Hiệp Lực.';
-            const labels = intro.querySelectorAll('.grid .p-3 .text-sm.text-gray-500');
+            const introH1 = intro.querySelector("h1.section-title");
+            if (introH1) introH1.textContent = "Xã Ninh Giang";
+            const introP = intro.querySelector("p.text-gray-600");
+            if (introP)
+              introP.textContent =
+                "Xã Ninh Giang là một đơn vị hành chính mới thuộc thành phố Hải Phòng, chính thức được thành lập vào ngày 16/06/2025 theo Nghị quyết 1669/NQ-UBTVQH15. Xã được hình thành từ việc sáp nhập 4 đơn vị cũ: thị trấn Ninh Giang, xã Vĩnh Hòa, xã Hồng Dụ và xã Hiệp Lực.";
+            const labels = intro.querySelectorAll(
+              ".grid .p-3 .text-sm.text-gray-500"
+            );
             if (labels.length >= 4) {
-              labels[0].textContent = 'Diện tích';
-              labels[1].textContent = 'Dân số (01/07/2025)';
-              labels[2].textContent = 'Mật độ dân số';
-              labels[3].textContent = 'Trụ sở UBND';
+              labels[0].textContent = "Diện tích";
+              labels[1].textContent = "Dân số (01/07/2025)";
+              labels[2].textContent = "Mật độ dân số";
+              labels[3].textContent = "Trụ sở UBND";
             }
-            const vals = intro.querySelectorAll('.grid .p-3 .font-semibold.text-gray-800');
+            const vals = intro.querySelectorAll(
+              ".grid .p-3 .font-semibold.text-gray-800"
+            );
             if (vals.length >= 4) {
-              vals[0].textContent = '27.41 km²';
-              vals[1].textContent = '39.535 người';
-              vals[2].textContent = '~2.207 người/km²';
-              vals[3].textContent = 'Đường Lê Thanh Nghị, xã Ninh Giang';
+              vals[0].textContent = "27.41 km²";
+              vals[1].textContent = "39.535 người";
+              vals[2].textContent = "~2.207 người/km²";
+              vals[3].textContent = "Đường Lê Thanh Nghị, xã Ninh Giang";
             }
-            const note = intro.querySelector('.border-dashed');
-            if (note) note.innerHTML = '<strong>Lưu ý:</strong> Thông tin tổng hợp từ nghị quyết thành lập và điều tra dân số.';
-            const img = intro.querySelector('img[alt]');
-            if (img) img.alt = 'Hải Phòng';
+            const note = intro.querySelector(".border-dashed");
+            if (note)
+              note.innerHTML =
+                "<strong>Lưu ý:</strong> Thông tin tổng hợp từ nghị quyết thành lập và điều tra dân số.";
+            const img = intro.querySelector("img[alt]");
+            if (img) img.alt = "Hải Phòng";
           }
 
-          const history = document.getElementById('history');
+          const history = document.getElementById("history");
           if (history) {
-            const h1 = history.querySelector('h1.section-title');
-            if (h1) h1.textContent = 'Lịch sử hình thành';
-            const prose = history.querySelector('.prose');
+            const h1 = history.querySelector("h1.section-title");
+            if (h1) h1.textContent = "Lịch sử hình thành";
+            const prose = history.querySelector(".prose");
             if (prose) {
-              const ps = prose.querySelectorAll('p');
+              const ps = prose.querySelectorAll("p");
               const texts = [
-                'Vùng đất Ninh Giang ngày nay có lịch sử định cư và phát triển lâu đời, với nhiều tên gọi và sự kiện quan trọng qua các triều đại.',
-                'Thời kỳ cổ đại đến thế kỷ X: Kết quả khảo cổ học tại vùng lân cận cho thấy cư dân đã sinh sống ở vùng đất này từ trước Công Nguyên. Vào năm 40, cuộc khởi nghĩa của Hai Bà Trưng cũng đã diễn ra ở vùng Hạ Hồng, và tướng Đô Lương của Hai Bà từng đóng quân ở khu vực Hiệp Lực ngày nay. Đầu thế kỷ X, làng Cúc Bồ (nay là xã Kiến Quốc) là nơi Khúc Thừa Dụ chiêu binh mãi, gây dựng cơ nghiệp, mở đầu kỷ nguyên tự chủ.',
+                "Vùng đất Ninh Giang ngày nay có lịch sử định cư và phát triển lâu đời, với nhiều tên gọi và sự kiện quan trọng qua các triều đại.",
+                "Thời kỳ cổ đại đến thế kỷ X: Kết quả khảo cổ học tại vùng lân cận cho thấy cư dân đã sinh sống ở vùng đất này từ trước Công Nguyên. Vào năm 40, cuộc khởi nghĩa của Hai Bà Trưng cũng đã diễn ra ở vùng Hạ Hồng, và tướng Đô Lương của Hai Bà từng đóng quân ở khu vực Hiệp Lực ngày nay. Đầu thế kỷ X, làng Cúc Bồ (nay là xã Kiến Quốc) là nơi Khúc Thừa Dụ chiêu binh mãi, gây dựng cơ nghiệp, mở đầu kỷ nguyên tự chủ.",
                 'Các triều đại phong kiến: Trước triều Trần, vùng đất này thuộc huyện Đông Lỗi. Đời vua Lê Thái Tổ, huyện Đông Lỗi được đổi thành Đông Lại. Dưới thời vua Lê Thánh Tông (1460-1469), đơn vị hành chính phủ Hạ Hồng được thành lập, quản lý 4 huyện, trong đó có huyện Vĩnh Lại - tiền thân của huyện Ninh Giang sau này. Đến năm 1822, vua Minh Mạng đổi tên phủ Hạ Hồng thành phủ Ninh Giang, với ý nghĩa là "vùng sông nước an toàn".',
-                'Thời kỳ Pháp thuộc và sau năm 1954: Năm 1919, chính quyền thuộc địa Pháp bỏ cấp phủ, tên gọi Ninh Giang chính thức được sử dụng để thay thế cho tên gọi cũ là Vĩnh Lại. Trong kháng chiến chống Pháp, Ninh Giang là một quận thuộc tỉnh Vĩnh Ninh. Sau năm 1954, huyện Ninh Giang thuộc tỉnh Hải Dương, sau đó sáp nhập vào tỉnh Hải Hưng (năm 1968). Ngày 1/4/1979, huyện Ninh Giang được sáp nhập với huyện Thanh Miện thành huyện Ninh Thanh, đến tháng 3/1996 thì lại được tách ra thành huyện Ninh Giang và huyện Thanh Miện như cũ.',
-                'Quá trình chuyển đổi gần đây: Theo chủ trương sắp xếp lại đơn vị hành chính, một xã mới thuộc thành phố Hải Phòng đã được thành lập và mang tên xã Ninh Giang. Xã mới này được hình thành chủ yếu từ việc sáp nhập thị trấn Ninh Giang và các xã Vĩnh Hòa, Hồng Dụ, Hiệp Lực. Việc lựa chọn tên gọi "Ninh Giang" nhằm giữ lại những giá trị truyền thống cốt lõi của vùng đất này.'
+                "Thời kỳ Pháp thuộc và sau năm 1954: Năm 1919, chính quyền thuộc địa Pháp bỏ cấp phủ, tên gọi Ninh Giang chính thức được sử dụng để thay thế cho tên gọi cũ là Vĩnh Lại. Trong kháng chiến chống Pháp, Ninh Giang là một quận thuộc tỉnh Vĩnh Ninh. Sau năm 1954, huyện Ninh Giang thuộc tỉnh Hải Dương, sau đó sáp nhập vào tỉnh Hải Hưng (năm 1968). Ngày 1/4/1979, huyện Ninh Giang được sáp nhập với huyện Thanh Miện thành huyện Ninh Thanh, đến tháng 3/1996 thì lại được tách ra thành huyện Ninh Giang và huyện Thanh Miện như cũ.",
+                'Quá trình chuyển đổi gần đây: Theo chủ trương sắp xếp lại đơn vị hành chính, một xã mới thuộc thành phố Hải Phòng đã được thành lập và mang tên xã Ninh Giang. Xã mới này được hình thành chủ yếu từ việc sáp nhập thị trấn Ninh Giang và các xã Vĩnh Hòa, Hồng Dụ, Hiệp Lực. Việc lựa chọn tên gọi "Ninh Giang" nhằm giữ lại những giá trị truyền thống cốt lõi của vùng đất này.',
               ];
-              ps.forEach((p, i) => { if (texts[i]) p.textContent = texts[i]; });
+              ps.forEach((p, i) => {
+                if (texts[i]) p.textContent = texts[i];
+              });
             }
-            const theadThs = history.querySelectorAll('thead th');
+            const theadThs = history.querySelectorAll("thead th");
             if (theadThs.length >= 2) {
-              theadThs[0].textContent = 'Thời Kỳ';
-              theadThs[1].textContent = 'Sự Kiện / Tên Gọi Chính';
+              theadThs[0].textContent = "Thời Kỳ";
+              theadThs[1].textContent = "Sự Kiện / Tên Gọi Chính";
             }
-            const rows = history.querySelectorAll('tbody tr');
+            const rows = history.querySelectorAll("tbody tr");
             const rowTexts = [
-              ['Trước thế kỷ X', 'Cư dân sinh sống từ trước Công nguyên. Gắn liền với khởi nghĩa Hai Bà Trưng (năm 40) và hoạt động của Khúc Thừa Dụ.'],
-              ['Triều Trần về trước', 'Thuộc huyện Đông Lỗi.'],
-              ['Thời Lê Sơ (1460-1469)', 'Thành lập phủ Hạ Hồng, quản lý huyện Vĩnh Lại.'],
-              ['Năm 1822', 'Vua Minh Mạng đổi phủ Hạ Hồng thành phủ Ninh Giang.'],
-              ['Năm 1919', 'Chính quyền Pháp bỏ cấp phủ, tên gọi Ninh Giang chính thức thay thế cho Vĩnh Lại.'],
-              ['Năm 1979 - 1996', 'Sáp nhập với huyện Thanh Miện thành huyện Ninh Thanh, sau đó lại tách ra.'],
-              ['Giai đoạn gần đây', 'Thành lập xã Ninh Giang thuộc TP. Hải Phòng trên cơ sở sáp nhập các đơn vị hành chính cũ.']
+              [
+                "Trước thế kỷ X",
+                "Cư dân sinh sống từ trước Công nguyên. Gắn liền với khởi nghĩa Hai Bà Trưng (năm 40) và hoạt động của Khúc Thừa Dụ.",
+              ],
+              ["Triều Trần về trước", "Thuộc huyện Đông Lỗi."],
+              [
+                "Thời Lê Sơ (1460-1469)",
+                "Thành lập phủ Hạ Hồng, quản lý huyện Vĩnh Lại.",
+              ],
+              [
+                "Năm 1822",
+                "Vua Minh Mạng đổi phủ Hạ Hồng thành phủ Ninh Giang.",
+              ],
+              [
+                "Năm 1919",
+                "Chính quyền Pháp bỏ cấp phủ, tên gọi Ninh Giang chính thức thay thế cho Vĩnh Lại.",
+              ],
+              [
+                "Năm 1979 - 1996",
+                "Sáp nhập với huyện Thanh Miện thành huyện Ninh Thanh, sau đó lại tách ra.",
+              ],
+              [
+                "Giai đoạn gần đây",
+                "Thành lập xã Ninh Giang thuộc TP. Hải Phòng trên cơ sở sáp nhập các đơn vị hành chính cũ.",
+              ],
             ];
             rows.forEach((tr, i) => {
-              const tds = tr.querySelectorAll('td');
+              const tds = tr.querySelectorAll("td");
               if (tds.length >= 2 && rowTexts[i]) {
                 tds[0].textContent = rowTexts[i][0];
                 tds[1].textContent = rowTexts[i][1];
               }
             });
-            const note2Wrap = history.querySelector('.mt-4.text-sm.text-gray-500');
-            if (note2Wrap) note2Wrap.innerHTML = '<strong>Lưu ý:</strong> Thông tin tổng hợp từ các tài liệu lịch sử và nghị quyết hành chính.';
+            const note2Wrap = history.querySelector(
+              ".mt-4.text-sm.text-gray-500"
+            );
+            if (note2Wrap)
+              note2Wrap.innerHTML =
+                "<strong>Lưu ý:</strong> Thông tin tổng hợp từ các tài liệu lịch sử và nghị quyết hành chính.";
           }
 
-          const culture = document.getElementById('culture');
+          const culture = document.getElementById("culture");
           if (culture) {
-            const h2 = culture.querySelector('h2.section-title');
-            if (h2) h2.textContent = 'Di tích & Văn hóa';
-            const h3s = culture.querySelectorAll('h3');
-            if (h3s[0]) h3s[0].textContent = 'Đời sống văn hóa & lễ hội';
-            if (h3s[1]) h3s[1].textContent = 'Làng nghề & ẩm thực';
-            const p1 = culture.querySelector('p.text-gray-700');
-            if (p1) p1.textContent = 'Đời sống văn hóa tinh thần nơi đây vô cùng phong phú với nhiều lễ hội truyền thống được tổ chức hàng năm. Ba di sản tiêu biểu đã được công nhận là Di sản Văn hóa phi vật thể Quốc gia:';
-            const links = culture.querySelectorAll('ul li a');
-            if (links[0]) links[0].textContent = 'Lễ hội truyền thống Đền Tranh';
-            if (links[1]) links[1].textContent = 'Lễ hội đình Trịnh Xuyên';
-            if (links[2]) links[2].textContent = 'Nghệ thuật múa rối nước Hồng Phong';
-            const p2 = culture.querySelectorAll('p.text-gray-700')[1];
-            if (p2) p2.innerHTML = '<strong>Lễ hội Đền Tranh</strong> là một trong những lễ hội lớn nhất, diễn ra hai kỳ chính trong năm:';
-            const p3 = culture.querySelectorAll('p.text-gray-700')[2];
-            if (p3) p3.textContent = 'Bên cạnh các giá trị văn hóa tâm linh, Ninh Giang còn nổi tiếng với những làng nghề truyền thống và đặc sản ẩm thực đậm chất quê hương:';
-            const figcap = culture.querySelector('p.text-sm.text-gray-500');
-            if (figcap) figcap.textContent = 'Hình ảnh: Lễ hội Đền Tranh – Di sản văn hóa phi vật thể Quốc gia.';
-            const img2 = culture.querySelector('img[alt]');
-            if (img2) img2.alt = 'Lễ hội Đền Tranh';
+            const h2 = culture.querySelector("h2.section-title");
+            if (h2) h2.textContent = "Di tích & Văn hóa";
+            const h3s = culture.querySelectorAll("h3");
+            if (h3s[0]) h3s[0].textContent = "Đời sống văn hóa & lễ hội";
+            if (h3s[1]) h3s[1].textContent = "Làng nghề & ẩm thực";
+            const p1 = culture.querySelector("p.text-gray-700");
+            if (p1)
+              p1.textContent =
+                "Đời sống văn hóa tinh thần nơi đây vô cùng phong phú với nhiều lễ hội truyền thống được tổ chức hàng năm. Ba di sản tiêu biểu đã được công nhận là Di sản Văn hóa phi vật thể Quốc gia:";
+            const links = culture.querySelectorAll("ul li a");
+            if (links[0])
+              links[0].textContent = "Lễ hội truyền thống Đền Tranh";
+            if (links[1]) links[1].textContent = "Lễ hội đình Trịnh Xuyên";
+            if (links[2])
+              links[2].textContent = "Nghệ thuật múa rối nước Hồng Phong";
+            const p2 = culture.querySelectorAll("p.text-gray-700")[1];
+            if (p2)
+              p2.innerHTML =
+                "<strong>Lễ hội Đền Tranh</strong> là một trong những lễ hội lớn nhất, diễn ra hai kỳ chính trong năm:";
+            const p3 = culture.querySelectorAll("p.text-gray-700")[2];
+            if (p3)
+              p3.textContent =
+                "Bên cạnh các giá trị văn hóa tâm linh, Ninh Giang còn nổi tiếng với những làng nghề truyền thống và đặc sản ẩm thực đậm chất quê hương:";
+            const figcap = culture.querySelector("p.text-sm.text-gray-500");
+            if (figcap)
+              figcap.textContent =
+                "Hình ảnh: Lễ hội Đền Tranh – Di sản văn hóa phi vật thể Quốc gia.";
+            const img2 = culture.querySelector("img[alt]");
+            if (img2) img2.alt = "Lễ hội Đền Tranh";
           }
 
-          const news = document.getElementById('news');
+          const news = document.getElementById("news");
           if (news) {
-            const p = news.querySelector('p.text-lg');
-            if (p) p.textContent = 'Cập nhật những hoạt động ngoại khóa, sự kiện và tin tức nổi bật của xã Ninh Giang.';
+            const p = news.querySelector("p.text-lg");
+            if (p)
+              p.textContent =
+                "Cập nhật những hoạt động ngoại khóa, sự kiện và tin tức nổi bật của xã Ninh Giang.";
           }
         } catch (e) {
-          console.warn('VN text normalize error', e);
+          console.warn("VN text normalize error", e);
         }
       });
     </script>
     <footer class="border-t border-slate-200 bg-white">
-      <div class="max-w-7xl mx-auto px-6 py-8 text-sm text-gray-600 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-        <div>© <span id="y2"></span> THPT Khắc Thừa Dụ. All rights reserved.</div>
+      <div
+        class="max-w-7xl mx-auto px-6 py-8 text-sm text-gray-600 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between"
+      >
+        <div>
+          © <span id="y2"></span> THPT Khắc Thừa Dụ. All rights reserved.
+        </div>
         <div class="text-gray-500">Liên hệ: contact@school.example</div>
       </div>
     </footer>
-    <script>document.getElementById('y2').textContent = new Date().getFullYear();</script>
+    <script>
+      document.getElementById("y2").textContent = new Date().getFullYear();
+    </script>
     <script>
       // Hiển thị sidebar ở giữa, chỉ khi đã cuộn qua phần home
-      document.addEventListener('DOMContentLoaded', function() {
-        const toc = document.getElementById('tocSidebar');
-        const home = document.getElementById('home');
+      document.addEventListener("DOMContentLoaded", function () {
+        const toc = document.getElementById("tocSidebar");
+        const home = document.getElementById("home");
         if (!toc || !home) return;
         function updateSidebar() {
           const r = home.getBoundingClientRect();
           const headerH = 70; // gần bằng h-16
           if (r.bottom <= headerH) {
-            toc.classList.remove('opacity-0','pointer-events-none');
-            toc.classList.add('opacity-100','pointer-events-auto');
+            toc.classList.remove("opacity-0", "pointer-events-none");
+            toc.classList.add("opacity-100", "pointer-events-auto");
           } else {
-            toc.classList.add('opacity-0','pointer-events-none');
-            toc.classList.remove('opacity-100','pointer-events-auto');
+            toc.classList.add("opacity-0", "pointer-events-none");
+            toc.classList.remove("opacity-100", "pointer-events-auto");
           }
         }
-        window.addEventListener('scroll', updateSidebar);
+        window.addEventListener("scroll", updateSidebar);
         updateSidebar();
       });
     </script>
   </body>
- </html>
-
-
-
-
-
-
-
+</html>
