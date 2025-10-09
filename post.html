@@ -7,11 +7,15 @@
     <link rel="icon" type="image/x-icon" href="/img/logo.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      @keyframes fadeUp { 0%{opacity:0;transform:translateY(20px)} 100%{opacity:1;transform:translateY(0)} }
+      @keyframes fadeUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
       .fade-up { animation: fadeUp .6s ease forwards; }
     </style>
   </head>
   <body class="m-0 font-inter text-gray-900 bg-gray-100 min-h-screen flex flex-col">
+    <!-- Header -->
     <header id="header" class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur border-b border-slate-200">
       <div class="max-w-7xl mx-auto flex items-center justify-between px-6 h-14">
         <a href="index.html#home" class="flex items-center gap-3">
@@ -26,6 +30,7 @@
       </div>
     </header>
 
+    <!-- Main -->
     <main class="pt-20 pb-16 flex-1">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 fade-up">
         <div class="mb-4 text-sm text-gray-600">
@@ -34,19 +39,20 @@
         <article id="reader" class="bg-white rounded-lg border border-slate-200 shadow-sm">
           <div class="p-5 sm:p-8">
             <h1 id="readerTitle" class="text-2xl sm:text-3xl font-bold mb-4 tracking-tight"></h1>
-            <div id="readerMeta" class="text-sm text-gray-500 mb-5 hidden"></div>
             <div id="readerContent" class="text-base leading-relaxed text-gray-800"></div>
           </div>
         </article>
       </div>
     </main>
 
+    <!-- Footer -->
     <footer class="border-t border-slate-200 bg-white">
       <div class="max-w-7xl mx-auto px-6 py-8 text-sm text-gray-600 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
         <div>© <span id="y"></span> THPT Khắc Thừa Dụ. All rights reserved.</div>
       </div>
     </footer>
 
+    <!-- Script -->
     <script>
       document.getElementById('y').textContent = new Date().getFullYear();
 
@@ -57,7 +63,13 @@
       }
 
       function escapeHTML(str) {
-        return (str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+        return (str || '').replace(/[&<>"']/g, c => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[c]));
       }
 
       function render(title, content) {
@@ -72,25 +84,19 @@
       async function load() {
         const id = getIdFromQuery();
         const url = `posts/${id}.txt`;
+
         try {
           const res = await fetch(url);
           if (!res.ok) throw new Error('Not found');
-          try {
-            const data = await res.clone().json();
-            render(data.title?.toString().trim(), data.content?.toString().trim());
-          } catch {
-            const text = await res.text();
-            const lines = text.split(/\r?\n/);
-            const title = (lines.shift() || '').trim();
-            const content = lines.join('\n').trim();
-            render(title, content);
-          }
+          const data = await res.json(); // ✅ chỉ xử lý JSON
+          render(data.title?.trim(), data.content?.trim());
         } catch (e) {
           render('Không tìm thấy bài viết', 'Vui lòng quay lại trang Tin tức.');
+          console.error('Lỗi tải bài viết:', e);
         }
       }
 
       load();
     </script>
   </body>
- </html>
+</html>
