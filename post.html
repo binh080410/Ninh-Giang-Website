@@ -53,50 +53,72 @@
     </footer>
 
     <!-- Script -->
-    <script>
-      document.getElementById('y').textContent = new Date().getFullYear();
+<!-- Script -->
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
 
-      function getIdFromQuery() {
-        const u = new URL(window.location.href);
-        const id = parseInt(u.searchParams.get('id') || '1', 10);
-        return isNaN(id) ? 1 : id;
-      }
+  function getIdFromQuery() {
+    const u = new URL(window.location.href);
+    const id = parseInt(u.searchParams.get('id') || '1', 10);
+    return isNaN(id) ? 1 : id;
+  }
 
-      function escapeHTML(str) {
-        return (str || '').replace(/[&<>"']/g, c => ({
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          '"': '&quot;',
-          "'": '&#39;'
-        }[c]));
-      }
+  function escapeHTML(str) {
+    return (str || '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[c]));
+  }
 
-      function render(title, content) {
-        const t = document.getElementById('readerTitle');
-        const c = document.getElementById('readerContent');
-        t.textContent = title || 'Bài viết';
-        const blocks = (content || '').split(/\r?\n\s*\r?\n/);
-        const html = blocks.map(b => `<p class="mb-4">${escapeHTML(b).replace(/\r?\n/g, '<br>')}</p>`).join('');
-        c.innerHTML = html || '<p class="text-gray-500">Không có nội dung.</p>';
-      }
+  function render(title, content, images) {
+    console.log('Render called with:', { title: title?.substring(0, 50) + '...', images }); // Debug: Kiểm tra data truyền vào
+    
+    const t = document.getElementById('readerTitle');
+    const c = document.getElementById('readerContent');
+    t.textContent = title || 'Bài viết';
+    
+    const blocks = (content || '').split(/\r?\n\s*\r?\n/);
+    let html = blocks.map(b => `<p class="mb-4">${escapeHTML(b).replace(/\r?\n/g, '<br>')}</p>`).join('');
+    
+    if (images && images.length > 0) {
+      console.log('Rendering images:', images); // Debug: Xác nhận images được xử lý
+      const imagesHtml = images.map(img => {
+        // Thêm onload/onerror để debug load ảnh
+        return `<img src="${escapeHTML(img)}" alt="Hình ảnh bài viết" class="w-full h-auto my-4 rounded-lg shadow-md" 
+                onerror="console.error('Image load failed:', '${img}')" 
+                onload="console.log('Image loaded:', '${img}')">`;
+      }).join('');
+      html += `<div class="images-section mt-6">${imagesHtml}</div>`;
+      console.log('Images HTML added:', imagesHtml.substring(0, 100) + '...'); // Debug: Xem HTML sinh ra
+    } else {
+      console.warn('No images to render'); // Debug: Nếu mảng rỗng
+    }
+    
+    c.innerHTML = html || '<p class="text-gray-500">Không có nội dung.</p>';
+    console.log('Final HTML:', c.innerHTML.substring(0, 200) + '...'); // Debug: Xem output cuối
+  }
 
-      async function load() {
-        const id = getIdFromQuery();
-        const url = `posts/${id}.txt`;
+  async function load() {
+    const id = getIdFromQuery();
+    const url = `posts/${id}.txt`;
+    console.log('Loading from URL:', url); // Debug: Xác nhận URL
 
-        try {
-          const res = await fetch(url);
-          if (!res.ok) throw new Error('Not found');
-          const data = await res.json(); // ✅ chỉ xử lý JSON
-          render(data.title?.trim(), data.content?.trim());
-        } catch (e) {
-          render('Không tìm thấy bài viết', 'Vui lòng quay lại trang Tin tức.');
-          console.error('Lỗi tải bài viết:', e);
-        }
-      }
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Not found');
+      const data = await res.json();
+      console.log('Fetched JSON:', data); // Debug: Toàn bộ data
+      render(data.title?.trim(), data.content?.trim(), data.images);
+    } catch (e) {
+      console.error('Lỗi tải bài viết:', e);
+      render('Không tìm thấy bài viết', 'Vui lòng quay lại trang Tin tức.');
+    }
+  }
 
-      load();
-    </script>
+  load();
+</script>
   </body>
 </html>
