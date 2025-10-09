@@ -14,21 +14,32 @@
         <p id="summary" class="text-gray-700 mb-4">Đang tải...</p>
         <div id="award" class="mt-2"></div>
         <div class="flex gap-3 mt-6">
-          <a href="../index.html" class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Về trang chủ</a>
-          <button id="retryBtn" class="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200">Làm lại</button>
+          <a
+            href="../index.html"
+            class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600"
+            >Về trang chủ</a
+          >
+          <button
+            id="retryBtn"
+            class="px-4 py-2 rounded-md bg-gray-100 hover:bg-gray-200"
+          >
+            Làm lại
+          </button>
         </div>
       </div>
     </main>
 
     <script>
       // Đọc kết quả từ sessionStorage
-      const score = Number(sessionStorage.getItem('quizScore'));
-      const total = Number(sessionStorage.getItem('quizTotal'));
-      const summaryEl = document.getElementById('summary');
-      const awardEl = document.getElementById('award');
-      const retryBtn = document.getElementById('retryBtn');
+      const score = Number(sessionStorage.getItem("quizScore"));
+      const total = Number(sessionStorage.getItem("quizTotal"));
+      const summaryEl = document.getElementById("summary");
+      const awardEl = document.getElementById("award");
+      const retryBtn = document.getElementById("retryBtn");
 
-      function backHome() { window.location.replace('../index.html'); }
+      function backHome() {
+        window.location.replace("../index.html");
+      }
 
       // Không có dữ liệu -> quay về trang chủ
       if (!Number.isFinite(score) || !Number.isFinite(total) || total <= 0) {
@@ -36,30 +47,37 @@
       } else {
         summaryEl.textContent = `Bạn đã trả lời đúng ${score}/${total} câu.`;
 
-        // Đủ số câu đúng -> hiển thị ảnh chứng nhận
-        const passed = score >= 5; // Giữ ngưỡng hiện tại
+        // Đủ số câu đúng -> hiển thị ảnh chứng nhận + lời mời đóng góp
+        const passed = score >= 5;
         if (passed) {
-          const img = document.createElement('img');
-          img.alt = 'Chứng nhận';
-          img.className = 'rounded border border-gray-200';
-          // Yêu cầu: hiện ảnh img/ceft khi đạt; có fallback sang cerf.png nếu thiếu
-          img.src = '../img/ceft.png';
-          img.onerror = function(){ this.onerror=null; this.src='../img/cerf.png'; };
+          const img = document.createElement("img");
+          img.alt = "Chứng nhận";
+          img.className = "rounded border border-gray-200 mb-3";
+          img.src = "../img/ceft.png";
+          img.onerror = function () {
+            this.onerror = null;
+            this.src = "../img/cerf.png";
+          };
           awardEl.appendChild(img);
+
+          // Dòng đóng góp Gmail
+          const emailNote = document.createElement("p");
+          emailNote.className = "text-sm text-gray-700 mt-2";
+          emailNote.innerHTML = `Bạn có thể đóng góp bài viết thông qua Gmail: <a href="mailto:binh31633@gmail.com" class="text-blue-600 hover:underline">binh31633@gmail.com</a>`;
+          awardEl.appendChild(emailNote);
         }
       }
 
       // Làm lại: xóa trạng thái và quay lại trang làm bài
-      retryBtn.addEventListener('click', () => {
+      retryBtn.addEventListener("click", () => {
         try {
-          sessionStorage.removeItem('quizScore');
-          sessionStorage.removeItem('quizTotal');
-          sessionStorage.removeItem('quizSource');
-          sessionStorage.removeItem('quizFinished');
+          sessionStorage.removeItem("quizScore");
+          sessionStorage.removeItem("quizTotal");
+          sessionStorage.removeItem("quizSource");
+          sessionStorage.removeItem("quizFinished");
         } catch (e) {}
-        window.location.replace('quiz.html');
+        window.location.replace("quiz.html");
       });
     </script>
   </body>
-  </html>
-
+</html>
