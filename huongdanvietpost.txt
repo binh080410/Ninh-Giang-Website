@@ -8,13 +8,13 @@ Thêm ảnh cho bài viết
 Thêm một trường mới trong JSON, ví dụ image (một ảnh) hoặc images (nhiều ảnh):
 {
 "title": "Hoạt động tình nguyện",
-"image": "img/hoat-dong.jpg",
+"image": "imgbao/hoat-dong.jpg",
 "content": "Học sinh khối 11 tham gia dọn vệ sinh môi trường...\n\nHoạt động nhận được ủng hộ tích cực."
 }
 hoặc
 {
 "title": "Ngày hội thể thao",
-"images": ["img/thethao1.jpg", "img/thethao2.jpg"],
+"images": ["imgbao/thethao1.jpg", "imgbao/thethao2.jpg"],
 "content": "Không khí sôi nổi tại ngày hội thể thao...\n\nCác môn thi đấu: bóng đá, kéo co, chạy tiếp sức."
 
 
