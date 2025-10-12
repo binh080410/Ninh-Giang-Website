@@ -15,10 +15,10 @@ hoặc
 {
 "title": "Ngày hội thể thao",
 "images": ["imgbao/thethao1.jpg", "imgbao/thethao2.jpg"],
-"content": "Không khí sôi nổi tại ngày hội thể thao...\n\nCác môn thi đấu: bóng đá, kéo co, chạy tiếp sức."
+"content": "Không khí sôi nổi tại ngày hội thể thao...\n\nCác môn thi đấu: bóng đá, kéo co, chạy tiếp sức."  // lưu ý chỉ được ghi nội dung 1 lần
 
 
-"content": "// tải nội dung sửa nên web:
+"content": "// tải nội dung sửa nên web:"
 - git add .
 -git commit -m "điền cgi cx đc nhm k đc trùng nhau"
 -git push origin main"
